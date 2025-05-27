@@ -1,12 +1,22 @@
 
-<h4>Spots</h4>
-<ul>
+<h1>Spots</h1>
+<div class="row">
   <% @spots.each do |spot| %>
-    <li>
-        <%= link_to spot.description, spot_path(spot)%>
-            hosted by - <%= spot.description %>
-            Storage Type: <%= spot.category %>
-            Dims: <%= spot.length %> by <%= spot.width %> by <%= spot.height %>
-    </li>
+    <div class="col-md-4 mb-4">
+      <div class="card spot-card h-100">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to spot.description, spot_path(spot) %></h5>
+          <p class="card-subtitle">
+            <%= spot.category.capitalize %>
+          </p>
+          <p class="card-text"><%= truncate(spot.description, length: 100) %></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <span class="price-tag">$<%= spot.rate %>/day</span>
+          <%= link_to "Book", spot_path(spot), class: "btn btn-outline-success btn-sm" %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
+

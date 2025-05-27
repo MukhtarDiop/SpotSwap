@@ -1,4 +1,5 @@
 class SpotsController < ApplicationController
+
   before_action :authenticate_user!,
 
   def index
@@ -26,5 +27,6 @@ class SpotsController < ApplicationController
   def spot_params
     params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category)
   end
+
 
 end
