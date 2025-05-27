@@ -4,7 +4,7 @@
     <div class="col-md-4 mb-4">
       <div class="card spot-card h-100">
         <div class="card-body">
-          <h5 class="card-title"><%= link_to spot.description, spot_path(spot) %></h5>
+          <h5 class="card-title"><%= link_to spot.description, spot_path(@spot) %></h5>
           <p class="card-subtitle">
             <%= spot.category.capitalize %>
           </p>
@@ -18,4 +18,3 @@
     </div>
   <% end %>
 </div>
-
