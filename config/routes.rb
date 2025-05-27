@@ -26,8 +26,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
   # 
-  get "spots", to: "spots#index"
+  get "spots", to: "spots#index" do
+     resources :bookings, only: [:new, :create]
+  end
 
   # Create a new Spot
   get "spots/new", to: "spots#new"
