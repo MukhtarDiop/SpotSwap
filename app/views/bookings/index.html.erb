@@ -1,16 +1,14 @@
 <% @bookings.each do |booking| %>
-    <div class="border p-4 rounded mb-4 shadow">
-      <p><strong>Spot:</strong> <%= booking.spot.title %></p>
-      <p><strong>Renter:</strong> <%= booking.user.email %></p>
-      <p><strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %></p>
-      <p><strong>Status:</strong> <%= booking.status.capitalize %></p>
-  
-      <% if booking.status == "pending" && booking.spot.user == current_user %>
-        <div class="mt-2 flex gap-2">
-          <%= button_to "Approve", approve_booking_path(booking), method: :patch, class: "bg-green-500 text-white px-4 py-1 rounded" %>
-          <%= button_to "Decline", decline_booking_path(booking), method: :patch, class: "bg-red-500 text-white px-4 py-1 rounded" %>
-        </div>
-      <% end %>
+  <div class="border p-4 rounded mb-4 shadow">
+    <p><strong>Spot:</strong> <%= booking.spot.description %></p>
+    <p><strong>Renter:</strong> <%= booking.user.email %></p>
+    <p><strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %></p>
+    <p><strong>Status:</strong> <%= booking.status.capitalize %></p>
+
+    <div class="mt-2 flex gap-2">
+      <%= button_to "Approve", approve_booking_path(booking), method: :patch, class: "bg-green-500 text-white px-4 py-1 rounded" %>
+      <%= button_to "Decline", decline_booking_path(booking), method: :patch, class: "bg-red-500 text-white px-4 py-1 rounded" %>
     </div>
-  <% end %>
+  </div>
+<% end %>
   
