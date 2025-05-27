@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   resources :spots do
     resources :bookings, only: [:new, :create]
+  end
 end
