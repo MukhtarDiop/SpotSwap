@@ -20,6 +20,7 @@ class BookingController < ApplicationController
 
   def destroy
   end
+  
   def status
     @user = current_user
     @bookings = @user.bookings.find(params[:id])
