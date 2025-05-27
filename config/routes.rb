@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  # resources :spots, only: [:index, :show]
   resources :bookings, only: [:index, :update] do
     member do
       patch :approve
@@ -28,9 +27,9 @@ Rails.application.routes.draw do
   end
 
   # Create a new Spot
-  get "spots/new", to: "spots#new"
+  get "spots/new", to: "spots#new", as: :new_spot
   post "spots", to: "spots#create"
 
   # Read One
-  get "spots/:id", to: "spots#show"
+  get "spots/:id", to: "spots#show", as: :spot
 end
