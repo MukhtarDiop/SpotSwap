@@ -9,10 +9,10 @@ class SpotsController < ApplicationController
   def show
     @spot = Spot.find(params[:id])
   end
+
   def new
   @spot = Spot.new
   end
-
 
   def create
     @spot = Spot.new(spot_params)
@@ -23,7 +23,7 @@ class SpotsController < ApplicationController
   end
 
   private
-  
+
   def spot_params
     params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category)
   end
