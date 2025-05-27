@@ -9,6 +9,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+
 # Create a user if none exists
 user = User.first || User.create!(
   first_name: "Test",

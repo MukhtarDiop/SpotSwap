@@ -1,2 +1,12 @@
-<h1>Spots#show</h1>
-<p>Find me in app/views/spots/show.html.erb</p>
+<div class="container">
+    <h1>Spots </h1>
+    <div class="mt-4">
+        <h2><%= @spot.description%></h2>
+        <p>hosted by - <%= @spot.user%></p>
+        <p>Location: <%= @spot.lat%> <%= @spot.long%></p>
+        <p>Rate: <%= @spot.rate%> per day</p>
+        <p>Dimensions: <%= @spot.length%>' X <%= @spot.width%>' X <%= @spot.height%>'  </p>
+    </div>
+
+</div>
+
