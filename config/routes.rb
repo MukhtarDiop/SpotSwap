@@ -10,14 +10,13 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :spots, only: [:index, :show]
+  resources :spots, only: [:index, :show, :new, :create]
   resources :bookings, only: [:index, :update] do
     member do
       patch :approve
       patch :decline
     end
   end
-
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -27,16 +26,17 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  # Create new booking
-  get "spots", to: "spots#index" do
-    get "bookings/new", to: "bookings#new"
-    post "bookings", to: "bookings#create"
-  end
+#   # Create new booking
+#   get "spots", to: "spots#index" do
+#     get "bookings/new", to: "bookings#new"
+#     post "bookings", to: "bookings#create"
+#   end
 
-  # Create a new Spot
-  get "spots/new", to: "spots#new"
-  post "spots", to: "spots#create"
+#   # Create a new Spot
+#   get "spots/new", to: "spots#new"
+#   post "spots", to: "spots#create"
 
-  # Read One
-  get "spots/:id", to: "spots#show", as: :spot
+#   # Read One
+#   get "spots/:id", to: "spots#show", as: :spot
+# end
 end
