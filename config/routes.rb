@@ -9,4 +9,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  # 
+  get "spots", to: "spots#index"
+
+  # Create a new Spot
+  get "spots/new", to: "spots#new"
+  post "spots", to: "spots#create"
+
+  # Read One
+  get "spots/:id", to: "spots#show", as: :spot
 end

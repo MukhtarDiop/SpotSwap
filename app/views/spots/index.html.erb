@@ -1,0 +1,12 @@
+
+<h4>Spots</h4>
+<ul>
+  <% @spots.each do |spot| %>
+    <li>
+        <%= link_to spot.name, spot_path(spot)%>
+            <%= spot.description %>
+            <%= spot.category %>
+            <%= spot.length %> <%= spot.width %> <%= spot.height %>
+    </li>
+  <% end %>
+</ul>
