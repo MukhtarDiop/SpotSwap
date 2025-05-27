@@ -1,21 +1,20 @@
 class BookingsController < ApplicationController
-
   def index
     @bookings = Booking.all
-  end 
-  
-  def approve
-   @booking = Booking.find(params[:id])
-   @booking.update(status: "approved")
-   redirect_to bookings_path, notice: "Booking approved!"
   end
-      
+
+  def approve
+    @booking = Booking.find(params[:id])
+    @booking.update(status: "approved")
+    redirect_to bookings_path, notice: "Booking approved!"
+  end
+
   def decline
     @booking = Booking.find(params[:id])
     @booking.update(status: "declined")
     redirect_to bookings_path, notice: "Booking declined!"
-  end 
-  
+  end
+
   def create
     @spot = Spot.find(params[:spot_id])
     @booking = Booking.new
@@ -29,11 +28,14 @@ class BookingsController < ApplicationController
     redirect_to booking_path(@booking)
   end
 
-  
   private
 
   def booking_params
     params.require(:booking).permit(:start_date, :end_date)
-  end 
-  
+  end
+
+  def status
+    @user = current_user
+    @bookings = @user.bookings.find(params[:id])
+  end
 end
