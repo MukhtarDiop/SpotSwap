@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   # Create new booking
-  get "spots", to: "spots#index" do
+    get "spots", to: "spots#index" do
     get "bookings/new", to: "bookings#new"
     post "bookings", to: "bookings#create"
   end
