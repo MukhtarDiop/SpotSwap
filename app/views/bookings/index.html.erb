@@ -6,8 +6,8 @@
     <p><strong>Status:</strong> <%= booking.status.capitalize %></p>
 
     <div class="mt-2 flex gap-2">
-      <%= button_to "Approve", approve_booking_path(booking), method: :patch, class: "bg-green-500 text-white px-4 py-1 rounded" %>
-      <%= button_to "Decline", decline_booking_path(booking), method: :patch, class: "bg-red-500 text-white px-4 py-1 rounded" %>
+      <%= button_to "Approve", approve_booking_path(booking), method: :patch, class: "btn btn-success" %>
+      <%= button_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-outline" %>
     </div>
   </div>
 <% end %>
