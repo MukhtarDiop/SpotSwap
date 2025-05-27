@@ -1,0 +1,13 @@
+<h1>Bookings for My Spots</h1>
+
+<% if @bookings.any? %>
+  <% @bookings.each do |booking| %>
+    <div>
+      <h3><%= booking.spot.full_name %></h3>
+      <p>Booked by: <%= booking.user.email %></p>
+      <p>From <%= booking.start_date.strftime %> to <%= booking.end_date.strftime %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>You have no bookings on your spots yet.</p>
+<% end %>
