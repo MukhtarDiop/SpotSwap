@@ -1,0 +1,12 @@
+
+<h4>Spots</h4>
+<ul>
+  <% @spots.each do |spot| %>
+    <li>
+        <%= link_to spot.description, spot_path(spot)%>
+            hosted by - <%= spot.description %>
+            Storage Type: <%= spot.category %>
+            Dims: <%= spot.length %> by <%= spot.width %> by <%= spot.height %>
+    </li>
+  <% end %>
+</ul>
