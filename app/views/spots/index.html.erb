@@ -1,17 +1,21 @@
-<h1>Find a Spots</h1>
+
 <h1>Spots</h1>
-
-<%= simple_form_for :search, method: :get, html: { class: 'filter-form' } do |f| %>
-  <div class="form-inputs">
-    <%= f.input :address, label: 'Address', input_html: { value: params[:address] } %>
-
-    <%= f.input :type, label: 'Type', input_html: { value: params[:type] } %>
-
-    <%= f.input :rental_duration, label: 'Rental Duration', input_html: { value: params[:rental_duration] } %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, 'Filter' %>
-    <%= link_to 'Clear Filters', spots_path, class: 'button' %>
-  </div>
-<% end %>
+<div class="row">
+  <% @spots.each do |spot| %>
+    <div class="col-md-4 mb-4">
+      <div class="card spot-card h-100">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to spot.description, spot_path(spot) %></h5>
+          <p class="card-subtitle">
+            <%= spot.category.capitalize %>
+          </p>
+          <p class="card-text"><%= truncate(spot.description, length: 100) %></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <span class="price-tag">$<%= spot.rate %>/day</span>
+          <%= link_to "Book", spot_path(spot), class: "btn btn-outline-success btn-sm" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
