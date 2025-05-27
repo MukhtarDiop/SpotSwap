@@ -13,5 +13,4 @@ class Spot < ApplicationRecord
   validates :width, numericality: true
 
   validates :category, inclusion: { in: CATEGORIES }
-
 end
