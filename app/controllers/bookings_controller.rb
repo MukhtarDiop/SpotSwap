@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   def index
     @bookings = Booking.all
   end 
-    
+  
   def approve
    @booking = Booking.find(params[:id])
    @booking.update(status: "approved")
@@ -29,6 +29,7 @@ class BookingsController < ApplicationController
     redirect_to booking_path(@booking)
   end
 
+  
   private
 
   def booking_params
