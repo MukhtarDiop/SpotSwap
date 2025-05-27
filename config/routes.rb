@@ -23,15 +23,15 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-#   # Create new booking
-#   get "spots", to: "spots#index" do
-#     get "bookings/new", to: "bookings#new"
-#     post "bookings", to: "bookings#create"
-#   end
+  # Create new booking
+    get "spots", to: "spots#index" do
+    get "bookings/new", to: "bookings#new"
+    post "bookings", to: "bookings#create"
+  end
 
-#   # Create a new Spot
-#   get "spots/new", to: "spots#new"
-#   post "spots", to: "spots#create"
+  # Create a new Spot
+  get "spots/new", to: "spots#new"
+  post "spots", to: "spots#create"
 
   # Read One
   get "spots/:id", to: "spots#show"
