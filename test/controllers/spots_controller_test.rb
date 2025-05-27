@@ -1,6 +1,9 @@
 require "test_helper"
 
 class SpotsControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
 
 #   test "should get index" do
 #     get spots_index_url
@@ -15,5 +18,4 @@ class SpotsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
-
 end
