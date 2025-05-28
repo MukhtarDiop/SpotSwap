@@ -33,6 +33,30 @@ class SpotsController < ApplicationController
   
   end
 
+  def update
+    @spot = Spot.find(params[:id])
+    if @spot.update(spot_params)
+      respond_to do |format|
+        format.js   # renders update.js.erb
+        format.html { redirect_to profile_path(anchor: "my-spots") }
+      end
+    else
+      respond_to do |format|
+        format.js   # renders update.js.erb with errors
+        format.html { render :edit }
+      end
+    end
+  end
+
+  def destroy
+    @spot = Spot.find(params[:id])
+    @spot.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("spot_#{@spot.id}") }
+      format.html { redirect_to profile_path(anchor: "my-spots"), notice: "Spot deleted." }
+    end
+  end
+
   private
 
   def spot_params
