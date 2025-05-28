@@ -13,3 +13,19 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 } 
+.featured-spots-container {
+  display: flex;
+  flex-wrap: nowrap; /* ou wrap si tu veux qu’ils aillent à la ligne */
+  gap: 20px;
+  overflow-x: auto; /* scroll horizontal si trop d'éléments */
+  padding: 1rem 0;
+}
+
+.featured-spot-card {
+  flex: 0 0 auto; /* évite de forcer à grandir */
+  width: 300px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  overflow: hidden;
+}

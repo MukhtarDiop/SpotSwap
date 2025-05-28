@@ -49,7 +49,7 @@
            <div class="featured-spot-desc"><%= spot.category %></div>
           <div class="featured-spot-footer">
             <span class="featured-spot-price">$<%= spot.rate %>/day</span>
-            <button class="btn">Book</button>
+             <%= link_to "Book", new_spot_booking_path(spot), class: "btn btn-primary" %>
           </div>
         </div>
       </div>
