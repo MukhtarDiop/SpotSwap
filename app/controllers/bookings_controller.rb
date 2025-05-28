@@ -3,6 +3,11 @@ class BookingsController < ApplicationController
     @bookings = Booking.all
   end
 
+  def myspotbookings
+     @bookings = Booking.joins(:spot).where(spots: { user_id: current_user })
+  end
+
+
   def approve
     @booking = Booking.find(params[:id])
     @booking.update(status: "approved")
