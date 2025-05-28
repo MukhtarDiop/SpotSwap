@@ -1,8 +1,16 @@
-# Create a user if none exists
+# Create a test user if none exists
 user = User.first || User.create!(
   first_name: "Test",
   last_name: "User",
   email: "test@example.com",
+  password: "password"
+)
+
+# Create a second user
+second_user = User.find_by(email: "renter@example.com") || User.create!(
+  first_name: "Renter",
+  last_name: "User",
+  email: "renter@example.com",
   password: "password"
 )
 
