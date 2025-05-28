@@ -1,11 +1,13 @@
-<h1>Request Booking</h1>
-
-<%= simple_form_for [@spot, @booking] do |f| %>
-  <%= f.input :start_date,
-              as: :string,
-              input_html: { data: { controller: "datepicker" } }%>
-  <%= f.input :end_date,
-              as: :string,
-              input_html: { data: { controller: "datepicker" } }%>
-  <%= f.submit "Request booking", class: "btn btn-primary" %>
-<% end %>
+<div class="container">
+  <h1>Request Booking</h1>
+  <p>Selecte the start and end dates for your booking at <strong><%= @spot.description %></strong></p>
+  <%= simple_form_for [@spot, @booking] do |f| %>
+    <%= f.input :start_date,
+                as: :string,
+                input_html: { data: { controller: "datepicker" } }%>
+    <%= f.input :end_date,
+                as: :string,
+                input_html: { data: { controller: "datepicker" } }%>
+    <%= f.submit "Request booking", class: "btn btn-primary" %>
+  <% end %>
+</div>
