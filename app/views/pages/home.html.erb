@@ -40,26 +40,53 @@
         <div class="featured-spot-photo">
           <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
         </div>
-        <div class="featured-spot-info">
-          <div class="featured-spot-header">
-            <span class="featured-spot-rating">★ <%= spot.description %></span>
-          </div>
-          <div class="featured-spot-meta">📍Lat: <%= spot.lat %>, Long:<%= spot.long%> </div>
-          <div class="featured-spot-desc">Size: <%= spot.length %>m X <%= spot.height %>m X <%= spot.width %>m </div>
-           <div class="featured-spot-desc"><%= spot.category %></div>
-          <div class="featured-spot-footer">
-            <span class="featured-spot-price">$<%= spot.rate %>/day</span>
-            <button class="btn">Book</button>
-          </div>
+        <div class="featured-spot-meta">📍 Downtown Seattle • 200 sq ft</div>
+        <div class="featured-spot-desc">Perfect for furniture, boxes, and seasonal items. Climate controlled and secure.</div>
+        <div class="featured-spot-footer">
+          <span class="featured-spot-price">$45/day</span>
+          <%= link_to "Book", spots_path, class: "btn" %>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+    <div class="featured-spot-card">
+      <div class="featured-spot-photo">
+        <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
+      </div>
+      <div class="featured-spot-info">
+        <div class="featured-spot-header">
+          <span class="featured-spot-name">Dry Basement</span>
+          <span class="featured-spot-rating">★ 4.7</span>
+        </div>
+        <div class="featured-spot-meta">📍 Capitol Hill • 150 sq ft</div>
+        <div class="featured-spot-desc">Clean, dry basement space. Great for long-term storage needs.</div>
+        <div class="featured-spot-footer">
+          <span class="featured-spot-price">$30/day</span>
+          <%= link_to "Book", spots_path, class: "btn" %>
+        </div>
+      </div>
+    </div>
+    <div class="featured-spot-card">
+      <div class="featured-spot-photo">
+        <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
+      </div>
+      <div class="featured-spot-info">
+        <div class="featured-spot-header">
+          <span class="featured-spot-name">Storage Unit</span>
+          <span class="featured-spot-rating">★ 4.8</span>
+        </div>
+        <div class="featured-spot-meta">📍 Bellevue • 100 sq ft</div>
+        <div class="featured-spot-desc">Professional storage facility with 24/7 access and security.</div>
+        <div class="featured-spot-footer">
+          <span class="featured-spot-price">$25/day</span>
+          <%= link_to "Book", spots_path, class: "btn" %>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <div class="cta-section">
-  <h2>Ready to get started?</h2>
-  <button class="btn btn-light">Get Started</button>
+  <h1>Ready to get started?</h1>
+  <%= link_to "Browse our Spaces", spots_path, class: "btn btn-primary" %>
 </div>
-
