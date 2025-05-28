@@ -1,5 +1,5 @@
 <div class="spots-logo-container">
-  <%= image_tag "https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748375631/ChatGPT_Image_May_27_2025_at_02_53_12_PM_iz8dcr.png", alt: "Logo", class: "spots-logo" %>
+  <%# <%= image_tag "https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748375631/ChatGPT_Image_May_27_2025_at_02_53_12_PM_iz8dcr.png", alt: "Logo", class: "spots-logo" %>
 </div>
 <div class="container">
   <h1>Spots</h1>
@@ -8,6 +8,7 @@
       <div class="col-md-4 mb-4">
         <div class="card spot-card h-100">
           <div class="card-body">
+            <%= cl_image_tag(spot.photos.first.key, class: "img-fluid rounded-top", crop: :fill) if spot.photos.attached? %>
             <h5 class="card-title"><%= link_to spot.description, spot_path(spot) %></h5>
             <p class="card-subtitle">
               <%= spot.category.capitalize %>

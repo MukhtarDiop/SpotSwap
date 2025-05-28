@@ -33,14 +33,12 @@
   <h2 class="featured-title">Featured Storage Spaces</h2>
   <p class="featured-subtitle">Discover popular spaces in your area</p>
   <div class="featured-spots-slider">
-    <div class="featured-spot-card">
-      <div class="featured-spot-photo">
-        <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
-      </div>
-      <div class="featured-spot-info">
-        <div class="featured-spot-header">
-          <span class="featured-spot-name">Spacious Garage</span>
-          <span class="featured-spot-rating">★ 4.9</span>
+  
+  <div class="featured-spots-container">
+    <% @spots.each do |spot| %>
+      <div class="featured-spot-card">
+        <div class="featured-spot-photo">
+          <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
         </div>
         <div class="featured-spot-meta">📍 Downtown Seattle • 200 sq ft</div>
         <div class="featured-spot-desc">Perfect for furniture, boxes, and seasonal items. Climate controlled and secure.</div>
@@ -84,9 +82,11 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
 <div class="cta-section">
-  <%= link_to "Ready to get started?", spots_path, class: "btn btn-primary" %>
+  <h1>Ready to get started?</h1>
+  <%= link_to "Browse our Spaces", spots_path, class: "btn btn-primary" %>
 </div>
