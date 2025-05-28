@@ -1,5 +1,5 @@
 class SpotsController < ApplicationController
-  before_action :authenticate_user!,
+  before_action :authenticate_user!, only: [:new, :create]
   def index
     @spots = Spot.all
     if params[:location].present?
@@ -32,7 +32,7 @@ class SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category)
+    params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category, :rate)
   end
 
 end
