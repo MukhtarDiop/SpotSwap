@@ -1,7 +1,7 @@
 class Spot < ApplicationRecord
   belongs_to :user
   has_many_attached :photos
-  CATEGORIES = ['storage', 'parking_space', 'garage']
+  CATEGORIES = ['storage', 'parking', 'garage']
 
   validates :description, presence: true
   validates :lat, presence: true

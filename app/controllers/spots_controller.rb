@@ -23,10 +23,14 @@ class SpotsController < ApplicationController
 
   def create
     @spot = Spot.new(spot_params)
-    @user = current_user
     @spot.user = current_user
-    @spot.save
-    redirect_to spot_path(@spot)
+    if @spot.save
+      redirect_to spot_path(@spot)
+    else
+      logger.debug @spot.errors.full_messages
+      render :new, status: :unprocessable_entity
+    end
+  
   end
 
   private
