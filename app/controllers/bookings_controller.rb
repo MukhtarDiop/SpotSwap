@@ -11,14 +11,18 @@ class BookingsController < ApplicationController
   def approve
     @booking = Booking.find(params[:id])
     @booking.update(status: "approved")
-    redirect_to bookings_path, notice: "Booking approved!"
-  end
+    @bookings = current_user.bookings
+    @spots = current_user.spots
+    @my_spot_bookings = Booking.joins(:spot).where(spots: { user_id: current_user.id })
+    render 'profiles/show'  end
 
   def decline
     @booking = Booking.find(params[:id])
     @booking.update(status: "declined")
-    redirect_to bookings_path, notice: "Booking declined!"
-  end
+    @bookings = current_user.bookings
+    @spots = current_user.spots
+    @my_spot_bookings = Booking.joins(:spot).where(spots: { user_id: current_user.id })
+    render 'profiles/show'  end
 
   def new
     @spot = Spot.find(params[:spot_id])
@@ -30,6 +34,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.spot = @spot
     @booking.user = current_user
+    @booking.status = "pending"
     if @booking.save
       redirect_to spot_path(@spot), notice: "Booking requested!"
     else

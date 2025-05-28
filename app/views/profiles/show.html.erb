@@ -1,8 +1,9 @@
 <div class="profile-container">
   <h1>Your Profile</h1>
   <div class="profile-tabs">
-    <button class="tab-btn active" data-tab="bookings">Bookings</button>
-    <button class="tab-btn" data-tab="spots">Your Spots</button>
+    <button class="tab-btn active" data-tab="bookings">My Bookings</button>
+    <button class="tab-btn" data-tab="spots">My Spots</button>
+    <button class="tab-btn" data-tab="myspotbookings">My Spot Bookings</button>
   </div>
   <div class="tab-content" id="bookings-tab">
     <% if @bookings.any? %>
@@ -29,6 +30,26 @@
       <p>No spots listed yet.</p>
     <% end %>
   </div>
+  <div class="tab-content" id="myspotbookings-tab" style="display:none;">
+    <% if @my_spot_bookings && @my_spot_bookings.any? %>
+      <% @my_spot_bookings.each do |booking| %>
+        <div class="profile-card" style="border:1px solid #eee; border-radius:8px; padding:16px; margin-bottom:16px; background:#fff;">
+          <strong>Spot:</strong> <%= booking.spot.description %><br>
+          <strong>Renter:</strong> <%= booking.user.email %><br>
+          <strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %><br>
+          <strong>Status:</strong> <%= booking.status&.capitalize || 'Pending' %><br>
+          <% if booking.status == "pending" %>
+            <div id="booking-<%= booking.id %>-actions" style="margin-top: 16px; display: flex; gap: 16px;">
+              <%= button_to "Approve", approve_booking_path(booking), method: :patch, class: "btn btn-success booking-approve-btn", data: { booking_id: booking.id }, form: { style: "display:inline;" } %>
+              <%= button_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-danger booking-decline-btn", data: { booking_id: booking.id }, form: { style: "display:inline;" } %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No bookings for your spots yet.</p>
+    <% end %>
+  </div>
 </div>
 
 <script>
@@ -38,6 +59,34 @@
       this.classList.add('active');
       document.getElementById('bookings-tab').style.display = this.dataset.tab === 'bookings' ? '' : 'none';
       document.getElementById('spots-tab').style.display = this.dataset.tab === 'spots' ? '' : 'none';
+      document.getElementById('myspotbookings-tab').style.display = this.dataset.tab === 'myspotbookings' ? '' : 'none';
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.booking-approve-btn, .booking-decline-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(event) {
+        var bookingId = btn.dataset.bookingId;
+        var actionsDiv = document.getElementById('booking-' + bookingId + '-actions');
+        if (!actionsDiv) return;
+        var approveBtn = actionsDiv.querySelector('.booking-approve-btn');
+        var declineBtn = actionsDiv.querySelector('.booking-decline-btn');
+        if (btn.classList.contains('booking-approve-btn')) {
+          approveBtn.classList.add('btn-success');
+          approveBtn.classList.remove('btn-outline-success');
+          declineBtn.classList.add('btn-secondary');
+          declineBtn.classList.remove('btn-danger');
+          declineBtn.disabled = true;
+          alert("You have approved this booking");
+        } else {
+          declineBtn.classList.add('btn-danger');
+          declineBtn.classList.remove('btn-outline-danger');
+          approveBtn.classList.add('btn-secondary');
+          approveBtn.classList.remove('btn-success');
+          approveBtn.disabled = true;
+          alert("You have declined this booking");
+        }
+      });
     });
   });
 </script>
