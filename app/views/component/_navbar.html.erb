@@ -32,8 +32,8 @@
 
       <div class="d-flex">
           <% if user_signed_in? %>
-        <!-- Affiche l’email (ou prénom) pour info -->
-        <%= link_to "profil", class: "btn btn-primary" do %>
+        <!-- Affiche l'email (ou prénom) pour info -->
+        <%= link_to profile_path, class: "btn btn-primary" do %>
             <i class="fas fa-user"></i> Profile
         <% end %>
         <!-- Lien Déconnexion : appelle Devise#destroy via DELETE -->

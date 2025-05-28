@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'profile', to: 'profiles#show'
+  get 'profile/show', to: 'profiles#show'
   get 'booking/index'
   get 'booking/show'
   get 'booking/new'

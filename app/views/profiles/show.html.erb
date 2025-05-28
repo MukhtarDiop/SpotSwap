@@ -1,0 +1,43 @@
+<div class="profile-container">
+  <h1>Your Profile</h1>
+  <div class="profile-tabs">
+    <button class="tab-btn active" data-tab="bookings">Bookings</button>
+    <button class="tab-btn" data-tab="spots">Your Spots</button>
+  </div>
+  <div class="tab-content" id="bookings-tab">
+    <% if @bookings.any? %>
+      <% @bookings.each do |booking| %>
+        <div class="profile-card">
+          <strong>Spot:</strong> <%= booking.spot.description %><br>
+          <strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %><br>
+          <strong>Status:</strong> <%= booking.status&.capitalize || 'Pending' %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No bookings yet.</p>
+    <% end %>
+  </div>
+  <div class="tab-content" id="spots-tab" style="display:none;">
+    <% if @spots.any? %>
+      <% @spots.each do |spot| %>
+        <div class="profile-card">
+          <strong>Description:</strong> <%= spot.description %><br>
+          <strong>Category:</strong> <%= spot.category %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No spots listed yet.</p>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById('bookings-tab').style.display = this.dataset.tab === 'bookings' ? '' : 'none';
+      document.getElementById('spots-tab').style.display = this.dataset.tab === 'spots' ? '' : 'none';
+    });
+  });
+</script>
