@@ -46,7 +46,7 @@
         <div class="featured-spot-desc">Perfect for furniture, boxes, and seasonal items. Climate controlled and secure.</div>
         <div class="featured-spot-footer">
           <span class="featured-spot-price">$45/day</span>
-          <button class="btn">Book</button>
+          <%= link_to "Book", spots_path, class: "btn" %>
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@
         <div class="featured-spot-desc">Clean, dry basement space. Great for long-term storage needs.</div>
         <div class="featured-spot-footer">
           <span class="featured-spot-price">$30/day</span>
-          <button class="btn">Book</button>
+          <%= link_to "Book", spots_path, class: "btn" %>
         </div>
       </div>
     </div>
@@ -80,7 +80,7 @@
         <div class="featured-spot-desc">Professional storage facility with 24/7 access and security.</div>
         <div class="featured-spot-footer">
           <span class="featured-spot-price">$25/day</span>
-          <button class="btn">Book</button>
+          <%= link_to "Book", spots_path, class: "btn" %>
         </div>
       </div>
     </div>
@@ -88,7 +88,5 @@
 </div>
 
 <div class="cta-section">
-  <h2>Ready to get started?</h2>
-  <button class="btn btn-light">Get Started</button>
+  <%= link_to "Ready to get started?", spots_path, class: "btn btn-primary" %>
 </div>
-
