@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'profile', to: 'profiles#show'
+  get 'profile/show', to: 'profiles#show'
   get 'booking/index'
   get 'booking/show'
   get 'booking/new'
@@ -7,6 +9,7 @@ Rails.application.routes.draw do
   get 'booking/update'
   get 'booking/destroy'
   get 'bookings/:id/status', to: 'bookings#status', as: 'booking_status'
+  get "myspotbookings", to: "bookings#myspotbookings", as: :my_spot_bookings
   devise_for :users
   root to: "pages#home"
 
@@ -17,12 +20,17 @@ Rails.application.routes.draw do
     end
   end
 
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
+
   # Defines the root path route ("/")
   # root "posts#index"
 
-  # Create new booking
   get "spots", to: "spots#index" do
-    get "bookings", to: "booking#new"
+    # Create new booking
+    get "bookings/new", to: "bookings#new"
     post "bookings", to: "bookings#create"
   end
 

@@ -1,10 +1,7 @@
 class SpotsController < ApplicationController
-
   before_action :authenticate_user!,
-
   def index
     @spots = Spot.all
-
     if params[:location].present?
       @spots = @spots.where("description ILIKE ? OR category ILIKE ?", "%#{params[:location]}%", "%#{params[:location]}%")
       # If you have an address or city field, use that instead!
@@ -14,6 +11,7 @@ class SpotsController < ApplicationController
       # Add your date filtering logic here, e.g., exclude spots that are booked in this range
       # This is a placeholder; actual logic depends on your booking model
     end
+
   end
 
   def show
@@ -37,6 +35,5 @@ class SpotsController < ApplicationController
   def spot_params
     params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category)
   end
-
 
 end

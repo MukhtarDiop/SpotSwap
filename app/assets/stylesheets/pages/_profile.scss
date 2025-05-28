@@ -1,0 +1,66 @@
+.profile-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 0;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn.active {
+  background: #222;
+  color: #fff;
+}
+
+.tab-content {
+  background: #fafbfc;
+  border-radius: 0 0 12px 12px;
+  padding: 24px 18px 12px 18px;
+  min-height: 120px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  padding: 18px 16px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  color: #333;
+  transition: box-shadow 0.2s;
+}
+
+.profile-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 16px 4px;
+  }
+  .tab-content {
+    padding: 14px 4px 8px 4px;
+  }
+  .profile-card {
+    padding: 12px 6px;
+  }
+} 
