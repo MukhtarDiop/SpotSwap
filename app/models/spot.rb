@@ -11,6 +11,6 @@ class Spot < ApplicationRecord
   validates :length, numericality: true
   validates :width, presence: true
   validates :width, numericality: true
-
+  validates :category, presence: true
   validates :category, inclusion: { in: CATEGORIES }
 end
