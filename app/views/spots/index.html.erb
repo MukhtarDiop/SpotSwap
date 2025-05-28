@@ -16,7 +16,7 @@
           </div>
           <div class="card-footer d-flex justify-content-between align-items-center">
             <span class="price-tag">$<%= spot.rate %>/day</span>
-            <%= link_to "Book", spot_path(spot), class: "btn btn-outline-success btn-sm" %>
+            <%= link_to "Book", new_spot_booking_path(spot), class: "btn btn-primary btn-sm" %>
           </div>
         </div>
       </div>
