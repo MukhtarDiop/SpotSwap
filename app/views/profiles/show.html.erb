@@ -28,8 +28,10 @@
     <% else %>
       <p>No spots listed yet.</p>
     <% end %>
+    <%= link_to "Add a new spot", new_spot_path, class: "btn btn-primary btn-sm" %>
   </div>
 </div>
+
 
 <script>
   document.querySelectorAll('.tab-btn').forEach(btn => {
