@@ -1,5 +1,8 @@
 class SpotsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :set_spot, only: [:show, :update, :destroy]
+  before_action :authorize_spot_owner, only: [:update, :destroy]
+
   def index
     @spots = Spot.all
     if params[:location].present?
@@ -14,7 +17,6 @@ class SpotsController < ApplicationController
   end
 
   def show
-    @spot = Spot.find(params[:id])
   end
 
   def new
@@ -30,11 +32,9 @@ class SpotsController < ApplicationController
       logger.debug @spot.errors.full_messages
       render :new, status: :unprocessable_entity
     end
-  
   end
 
   def update
-    @spot = Spot.find(params[:id])
     if @spot.update(spot_params)
       respond_to do |format|
         format.js   # renders update.js.erb
@@ -49,18 +49,33 @@ class SpotsController < ApplicationController
   end
 
   def destroy
-    @spot = Spot.find(params[:id])
-    @spot.destroy
-    respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove("spot_#{@spot.id}") }
-      format.html { redirect_to profile_path(anchor: "my-spots"), notice: "Spot deleted." }
+    begin
+      @spot.destroy
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("spot_#{@spot.id}") }
+        format.html { redirect_to profile_path(anchor: "my-spots"), notice: "Spot deleted." }
+      end
+    rescue ActiveRecord::InvalidForeignKey => e
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("spot_#{@spot.id}", partial: "spots/error", locals: { error: "Cannot delete spot with active bookings" }) }
+        format.html { redirect_to profile_path(anchor: "my-spots"), alert: "Cannot delete spot with active bookings" }
+      end
     end
   end
 
   private
 
+  def set_spot
+    @spot = Spot.find(params[:id])
+  end
+
+  def authorize_spot_owner
+    unless @spot.user == current_user
+      redirect_to root_path, alert: "You are not authorized to perform this action."
+    end
+  end
+
   def spot_params
     params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category, :rate, photos: [])
   end
-
 end
