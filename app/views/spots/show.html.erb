@@ -1,6 +1,7 @@
 <div class="container">
     <h1>Spots </h1>
     <div class="mt-4">
+        <%= cl_image_tag @spot.photo.key, height: 300, width: 200, crop: :fill%>
         <h2><%= @spot.description%></h2>
         <p>hosted by - <%= @spot.user.first_name%> <%= @spot.user.last_name%></p>
         <p>Location: <%= @spot.lat%> <%= @spot.long%></p>
