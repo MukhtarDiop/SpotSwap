@@ -1,9 +1,15 @@
+<div class="spots-logo-container">
+  <%= image_tag "https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748375631/ChatGPT_Image_May_27_2025_at_02_53_12_PM_iz8dcr.png", alt: "Logo", class: "spots-logo" %>
+</div>
+
 <div class="hero-section">
   <div class="hero-content">
     <h1>Find Storage Space Anywhere</h1>
     <p>Rent unused garages, basements, and storage units from local owners. Safe, affordable, and convenient.</p>
-    <form class="hero-search">
-      <input type="text" placeholder="Enter location..." />
+    <form class="hero-search" action="<%= spots_path %>" method="get">
+      <input type="text" name="location" placeholder="Enter location..." />
+      <input type="date" name="start_date" />
+      <input type="date" name="end_date" />
       <button type="submit">Search</button>
     </form>
     <div class="hero-stats">
@@ -23,9 +29,61 @@
   </div>
 </div>
 
-<div class="features">
-  <div class="feature-card">
-    <i class="fas fa-icon"></i>
+<div class="featured-spots-section">
+  <h2 class="featured-title">Featured Storage Spaces</h2>
+  <p class="featured-subtitle">Discover popular spaces in your area</p>
+  <div class="featured-spots-slider">
+    <div class="featured-spot-card">
+      <div class="featured-spot-photo">
+        <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
+      </div>
+      <div class="featured-spot-info">
+        <div class="featured-spot-header">
+          <span class="featured-spot-name">Spacious Garage</span>
+          <span class="featured-spot-rating">★ 4.9</span>
+        </div>
+        <div class="featured-spot-meta">📍 Downtown Seattle • 200 sq ft</div>
+        <div class="featured-spot-desc">Perfect for furniture, boxes, and seasonal items. Climate controlled and secure.</div>
+        <div class="featured-spot-footer">
+          <span class="featured-spot-price">$45/day</span>
+          <button class="btn">Book</button>
+        </div>
+      </div>
+    </div>
+    <div class="featured-spot-card">
+      <div class="featured-spot-photo">
+        <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
+      </div>
+      <div class="featured-spot-info">
+        <div class="featured-spot-header">
+          <span class="featured-spot-name">Dry Basement</span>
+          <span class="featured-spot-rating">★ 4.7</span>
+        </div>
+        <div class="featured-spot-meta">📍 Capitol Hill • 150 sq ft</div>
+        <div class="featured-spot-desc">Clean, dry basement space. Great for long-term storage needs.</div>
+        <div class="featured-spot-footer">
+          <span class="featured-spot-price">$30/day</span>
+          <button class="btn">Book</button>
+        </div>
+      </div>
+    </div>
+    <div class="featured-spot-card">
+      <div class="featured-spot-photo">
+        <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
+      </div>
+      <div class="featured-spot-info">
+        <div class="featured-spot-header">
+          <span class="featured-spot-name">Storage Unit</span>
+          <span class="featured-spot-rating">★ 4.8</span>
+        </div>
+        <div class="featured-spot-meta">📍 Bellevue • 100 sq ft</div>
+        <div class="featured-spot-desc">Professional storage facility with 24/7 access and security.</div>
+        <div class="featured-spot-footer">
+          <span class="featured-spot-price">$25/day</span>
+          <button class="btn">Book</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
