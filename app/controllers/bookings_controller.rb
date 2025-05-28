@@ -20,17 +20,21 @@ class BookingsController < ApplicationController
     redirect_to bookings_path, notice: "Booking declined!"
   end
 
-  def create
+  def new
     @spot = Spot.find(params[:spot_id])
     @booking = Booking.new
   end
 
-  def new
+  def create
+    @spot = Spot.find(params[:spot_id])
     @booking = Booking.new(booking_params)
-    @booking.spot = @booking
-    @booking.save
-
-    redirect_to booking_path(@booking)
+    @booking.spot = @spot
+    @booking.user = current_user
+    if @booking.save
+      redirect_to spot_path(@spot), notice: "Booking requested!"
+    else
+      render :new
+    end
   end
 
   private

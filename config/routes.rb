@@ -33,4 +33,8 @@ Rails.application.routes.draw do
 
   # Read One
   get "spots/:id", to: "spots#show", as: :spot
+
+  resources :spots do
+    resources :bookings, only: [:new, :create]
+  end
 end
