@@ -11,7 +11,6 @@ class SpotsController < ApplicationController
       # Add your date filtering logic here, e.g., exclude spots that are booked in this range
       # This is a placeholder; actual logic depends on your booking model
     end
-
   end
 
   def show
@@ -19,7 +18,7 @@ class SpotsController < ApplicationController
   end
 
   def new
-  @spot = Spot.new
+    @spot = Spot.new
   end
 
   def create

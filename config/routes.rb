@@ -1,13 +1,6 @@
 Rails.application.routes.draw do
   get 'profile', to: 'profiles#show'
   get 'profile/show', to: 'profiles#show'
-  get 'booking/index'
-  get 'booking/show'
-  get 'booking/new'
-  get 'booking/create'
-  get 'booking/edit'
-  get 'booking/update'
-  get 'booking/destroy'
   get 'bookings/:id/status', to: 'bookings#status', as: 'booking_status'
   get "myspotbookings", to: "bookings#myspotbookings", as: :my_spot_bookings
   devise_for :users
@@ -27,8 +20,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
   get "spots", to: "spots#index" do
-    # create new booking
+    # Create new booking
     get "bookings/new", to: "bookings#new"
     post "bookings", to: "bookings#create"
   end
