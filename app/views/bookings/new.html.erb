@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Request Booking</h1>
-  <p>Selecte the start and end dates for your booking at <strong><%= @spot.description %></strong></p>
+  <p>Select the start and end dates for your booking at <strong><%= @spot.description %></strong></p>
   <%= simple_form_for [@spot, @booking] do |f| %>
     <%= f.input :start_date,
                 as: :string,
