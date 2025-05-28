@@ -5,10 +5,7 @@ class Spot < ApplicationRecord
   CATEGORIES = ['storage', 'parking_space', 'garage']
 
   validates :description, presence: true
-  validates :latitude, presence: true
-  validates :latitude, numericality: true
-  validates :longitude, presence: true
-  validates :longitude, numericality: true
+  validates :address, presence: true
   validates :length, presence: true
   validates :length, numericality: true
   validates :width, presence: true

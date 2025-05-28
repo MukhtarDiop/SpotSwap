@@ -1,5 +1,11 @@
+puts "Cleaning the database"
+Booking.destroy_all
+Spot.destroy_all
+User.destroy_all
+
+puts "Creating users."
 # Create a test user if none exists
-user = User.first || User.create!(
+user = User.create!(
   first_name: "Test",
   last_name: "User",
   email: "test@example.com",
@@ -7,19 +13,19 @@ user = User.first || User.create!(
 )
 
 # Create a second user
-second_user = User.find_by(email: "renter@example.com") || User.create!(
+second_user = User.create!(
   first_name: "Renter",
   last_name: "User",
   email: "renter@example.com",
   password: "password"
 )
 
+puts "Creating a spot"
 # Create a spot if none exists
-spot = Spot.first || Spot.create!(
+spot = Spot.create!(
   description: "Test Storage Spot",
   category: "storage",
-  lat: 47.6062,
-  long: -122.3321,
+  address: "5333 ave casgrain, Montreal",
   rate: 25,
   length: 10,
   width: 10,
@@ -27,6 +33,7 @@ spot = Spot.first || Spot.create!(
   user: user
 )
 
+puts "Creating a booking"
 # Now create a booking
 Booking.create!(
   user: user,

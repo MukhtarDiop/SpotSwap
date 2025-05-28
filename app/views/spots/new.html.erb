@@ -3,8 +3,6 @@
     <%= simple_form_for @spot do |f| %>
         <%= f.input :description %>
         <%= f.input :category, as: :select, collection: ['storage', 'parking space', 'garage'] %>
-        <%= f.input :lat %>
-        <%= f.input :long %>
         <%= f.input :length %>
         <%= f.input :width %>
         <%= f.input :height %>
