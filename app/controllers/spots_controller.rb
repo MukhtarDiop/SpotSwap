@@ -11,6 +11,12 @@ class SpotsController < ApplicationController
       # Add your date filtering logic here, e.g., exclude spots that are booked in this range
       # This is a placeholder; actual logic depends on your booking model
     end
+    @markers = @spots.geocoded.map do |spot|
+        {
+          lat: spot.latitude,
+          lng: spot.longitude
+        }
+    end
   end
 
   def show

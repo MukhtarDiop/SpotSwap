@@ -4,8 +4,6 @@
         <%= f.input :description %>
         <%= f.input :photos, as: :file, input_html: { multiple: true } %>
         <%= f.input :category, as: :select, collection: ['storage', 'parking', 'garage'] %>
-        <%= f.input :lat %>
-        <%= f.input :long %>
         <%= f.input :length %>
         <%= f.input :width %>
         <%= f.input :height %>
