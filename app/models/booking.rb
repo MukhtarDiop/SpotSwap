@@ -10,6 +10,18 @@ class Booking < ApplicationRecord
   validate :no_past_dates
   validate :dates_available
 
+  # Returns the number of nights for the booking (excluding checkout date)
+  def nights
+    return 0 if start_date.blank? || end_date.blank?
+    (end_date.to_date - start_date.to_date).to_i
+  end
+
+  # Returns the total price for the booking
+  def total_price
+    return 0 unless spot && spot.rate && nights.positive?
+    spot.rate.to_f * nights
+  end
+
   private
 
   def end_date_after_start_date

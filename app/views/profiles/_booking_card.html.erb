@@ -1,8 +1,9 @@
 <div class="profile-card" style="border:1px solid #eee; border-radius:8px; padding:16px; margin-bottom:16px; background:#fff;">
-  <strong>Spot:</strong> <%= booking.spot.description %><br>
+  <strong>Spot:</strong> <span style="display:inline-block; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom;"> <%= booking.spot.description %></span><br>
   <strong>Renter:</strong> <%= booking.user.email %><br>
   <strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %><br>
   <strong>Status:</strong> <%= booking.status&.capitalize || 'Pending' %><br>
+  <strong>Total Price:</strong> $<%= number_with_precision(booking.total_price, precision: 2) %><br>
   <% if booking.status == "pending" %>
     <div id="booking-<%= booking.id %>-actions" style="margin-top: 16px; display: flex; gap: 16px;">
       <%= button_to "Approve", approve_booking_path(booking), method: :patch, class: "btn btn-success booking-approve-btn", data: { booking_id: booking.id }, form: { style: "display:inline;" } %>
