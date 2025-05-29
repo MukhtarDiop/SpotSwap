@@ -1,14 +1,15 @@
 <div class="container">
-    <h1>New Spot</h1>
-    <%= simple_form_for @spot do |f| %>
-        <%= f.input :description %>
-        <%= f.input :address %>
-        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-        <%= f.input :category, as: :select, collection: ['storage', 'parking', 'garage'] %>
-        <%= f.input :length %>
-        <%= f.input :width %>
-        <%= f.input :height %>
-        <%= f.input :rate %>
-        <%= f.submit %>
-    <% end %>
+  <h1>New Spot</h1>
+  <%= simple_form_for @spot do |f| %>
+    <%= f.input :title, input_html: { maxlength: 30 }%>
+    <%= f.input :description, input_html: { maxlength: 120 } %>
+    <%= f.input :address %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+    <%= f.input :category, as: :select, collection: Spot::CATEGORIES %>
+    <%= f.input :length %>
+    <%= f.input :width %>
+    <%= f.input :height %>
+    <%= f.input :rate %>
+    <%= f.submit %>
+  <% end %>
 </div>
