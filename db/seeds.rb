@@ -20,8 +20,8 @@ user4 = User.create!(email: "diego@example.com", password: "password", first_nam
 
 puts "Creating spots for Naika... 👩🏾‍💻"
 spot1 = Spot.create!(
-  title: "Downtown Garage Space",
-  description: "Indoor garage spot in the heart of the city. Secure and accessible.",
+  title: "Downtown Garage Spot",
+  description: "Indoor garage in the city center. Safe, secure, and easily accessible.",
   category: "garage",
   rate: 18.0,
   length: 4.5,
@@ -34,8 +34,8 @@ spot1 = Spot.create!(
 # spot1.photos.attach(io: file, filename: "downtown_garage.jpg", content_type: "image/jpg")
 
 spot2 = Spot.create!(
-  title: "Residential Storage Room",
-  description: "Clean, dry storage room available in a private home basement.",
+  title: "Basement Storage Room",
+  description: "Dry, clean basement storage room in private home. Easy to access and secure.",
   category: "storage",
   rate: 12.0,
   length: 3.0,
@@ -48,8 +48,8 @@ spot2 = Spot.create!(
 # spot2.photos.attach(io: file, filename: "storage_room.jpg", content_type: "image/jpg")
 
 spot3 = Spot.create!(
-  title: "Secure Parking Spot Near Civic Center",
-  description: "Outdoor parking space with camera surveillance.",
+   title: "Civic Center Parking Spot",
+  description: "Outdoor parking with camera surveillance near Civic Center. Accessible anytime.",
   category: "parking",
   rate: 15.0,
   length: 5.0,
@@ -63,8 +63,8 @@ spot3 = Spot.create!(
 
 puts "Creating spots for Mateo... 👨🏻‍💻"
 spot4 = Spot.create!(
-  title: "Covered Garage in Mission District",
-  description: "Private garage with key access. Great for motorcycles or compact cars.",
+  title: "Garage in Mission District",
+  description: "Covered garage with private key access. Best for motorcycles or compact cars.",
   category: "garage",
   rate: 20.0,
   length: 4.0,
@@ -77,8 +77,8 @@ spot4 = Spot.create!(
 # spot4.photos.attach(io: file, filename: "mission_garage.jpg", content_type: "image/jpg")
 
 spot5 = Spot.create!(
-  title: "Spare Closet for Storage",
-  description: "Extra closet space in a clean, smoke-free home. Ideal for boxes or small items.",
+  title: "Spare Closet Storage",
+  description: "Clean closet in smoke-free home. Good for boxes, clothes, or small items.",
   category: "storage",
   rate: 10.0,
   length: 2.0,
@@ -92,8 +92,8 @@ spot5 = Spot.create!(
 
 puts "Creating spots for Lena...🙋🏼‍♀️"
 spot6 = Spot.create!(
-  title: "Bright Parking Spot in Downtown",
-  description: "Open-air parking spot with easy access to main roads.",
+  title: "Downtown Parking Spot",
+  description: "Open-air parking with quick access to main streets. Located downtown.",
   category: "parking",
   rate: 16.0,
   length: 5.0,
@@ -106,8 +106,8 @@ spot6 = Spot.create!(
 # spot6.photos.attach(io: file, filename: "parking_spot2.png", content_type: "image/png")
 
 spot7 = Spot.create!(
-  title: "Garage Space with Electric Charger",
-  description: "Garage spot with EV charger included. Secure gated access.",
+  title: "Garage Spot with EV Charger",
+  description: "Secure garage space with electric vehicle charger. Gated community access.",
   category: "garage",
   rate: 25.0,
   length: 5.0,
@@ -120,8 +120,8 @@ spot7 = Spot.create!(
 # spot7.photos.attach(io: file, filename: "garage_ev.png", content_type: "image/png")
 
 spot8 = Spot.create!(
-  title: "Storage Locker Near BART",
-  description: "Convenient storage locker near public transit. Dry and secure.",
+  title: "Storage Near BART Station",
+  description: "Secure, dry storage locker close to public transit and BART station.",
   category: "storage",
   rate: 14.0,
   length: 3.0,
@@ -134,8 +134,8 @@ spot8 = Spot.create!(
 # spot8.photos.attach(io: file, filename: "storage_locker.png", content_type: "image/png")
 
 spot9 = Spot.create!(
-  title: "Compact Parking Space",
-  description: "Tight parking spot for compact vehicles only.",
+  title: "Compact Car Parking Spot",
+  description: "Narrow parking for small cars only. Ideal for compact vehicles in the city.",
   category: "parking",
   rate: 12.0,
   length: 4.0,
@@ -149,8 +149,8 @@ spot9 = Spot.create!(
 
 puts "Creating spots for Omar...🤷🏽‍♂️"
 spot10 = Spot.create!(
-  title: "Private Garage with Workshop",
-  description: "Garage space with workbench and storage racks.",
+  title: "Garage with Workshop Space",
+  description: "Garage with workbench and racks. Perfect for storage or small repairs.",
   category: "garage",
   rate: 22.0,
   length: 6.0,
@@ -163,8 +163,8 @@ spot10 = Spot.create!(
 # spot10.photos.attach(io: file, filename: "garage_workshop.png", content_type: "image/png")
 
 spot11 = Spot.create!(
-  title: "Secure Storage Unit",
-  description: "Storage unit in gated community with 24/7 surveillance.",
+  title: "Gated Storage Unit",
+  description: "Storage unit in secure gated complex with 24/7 camera monitoring.",
   category: "storage",
   rate: 18.0,
   length: 3.5,
@@ -177,8 +177,8 @@ spot11 = Spot.create!(
 # spot11.photos.attach(io: file, filename: "storage_unit.png", content_type: "image/png")
 
 spot12 = Spot.create!(
-  title: "Outdoor Parking Spot",
-  description: "Covered parking spot with easy street access.",
+  title: "Outdoor Covered Parking",
+  description: "Covered parking spot with direct street access. Centrally located.",
   category: "parking",
   rate: 14.0,
   length: 5.0,
@@ -191,8 +191,8 @@ spot12 = Spot.create!(
 # spot12.photos.attach(io: file, filename: "outdoor_parking.png", content_type: "image/png")
 
 spot13 = Spot.create!(
-  title: "Garage Spot Near the Bay",
-  description: "Spacious garage close to waterfront.",
+  title: "Bay Area Garage Spot",
+  description: "Spacious garage near the waterfront. Easy access to major roads.",
   category: "garage",
   rate: 19.0,
   length: 5.0,
@@ -207,8 +207,8 @@ spot13 = Spot.create!(
 puts "Creating spots for Claire...🧘🏾‍♀️"
 
 spot14 = Spot.create!(
-  title: "Cozy Garage Space in Seattle",
-  description: "Secure garage spot near downtown Seattle, easy access to I-5.",
+  title: "Garage Space in Seattle",
+  description: "Secure garage spot near downtown Seattle. Close to I-5 and central spots.",
   category: "garage",
   rate: 22.0,
   length: 5.0,
@@ -221,8 +221,8 @@ spot14 = Spot.create!(
 # spot14.photos.attach(io: file, filename: "seattle_garage.png", content_type: "image/png")
 
 spot15 = Spot.create!(
-  title: "Outdoor Parking Spot in Toronto",
-  description: "Outdoor parking spot in a safe neighborhood close to public transit.",
+  title: "Toronto Parking Spot",
+  description: "Outdoor parking in safe area with public transport access nearby.",
   category: "parking",
   rate: 17.0,
   length: 5.0,
@@ -237,8 +237,8 @@ spot15 = Spot.create!(
 puts "Creating spots for Diego...🧔🏼‍♂️"
 
 spot16 = Spot.create!(
-  title: "Covered Storage Space in Mexico City",
-  description: "Dry, covered storage unit near downtown Mexico City.",
+  title: "Storage in Mexico City",
+  description: "Dry, covered storage close to downtown Mexico City. Secure building.",
   category: "storage",
   rate: 14.0,
   length: 3.5,
@@ -251,8 +251,22 @@ spot16 = Spot.create!(
 # spot16.photos.attach(io: file, filename: "mexico_storage.png", content_type: "image/png")
 
 spot17 = Spot.create!(
-  title: "Garage Spot in Vancouver",
-  description: "Secure garage spot near downtown Vancouver with 24/7 access.",
+  title: "Garage in Vancouver",
+  description: "Secure garage in central Vancouver with 24/7 entry and surveillance.",
+  category: "garage",
+  rate: 24.0,
+  length: 5.5,
+  width: 2.6,
+  height: 2.4,
+  address: "555 Burrard St, Vancouver, BC V7X 1M3, Canada",
+  user: user4
+)
+# file = URI.open("https://via.placeholder.com/600x400.png?text=Vancouver+Garage")
+# spot17.photos.attach(io: file, filename: "vancouver_garage.png", content_type: "image/png")
+
+spot18 = Spot.create!(
+  title: "Underground Garage Space",
+  description: "Underground garage with gated entry. Central location, well-lit and secure.",
   category: "garage",
   rate: 24.0,
   length: 5.5,
