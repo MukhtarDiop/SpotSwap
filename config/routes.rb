@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   # Show all spots
-  resources :spots, only: [:index, :show, :new, :create, :destroy] do
+  resources :spots, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
     # Create new booking
     resources :bookings, only: [:new, :create]
   end

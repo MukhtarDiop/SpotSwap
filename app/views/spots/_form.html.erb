@@ -1,9 +1,11 @@
-<%= simple_form_for spot, html: { id: "edit-spot-form-#{spot.id}" } do |f| %>
-  <%= f.input :description %>
-  <%= f.input :category %>
-  <div style="margin-top: 8px; display: flex; justify-content: flex-end; gap: 8px;">
-    <%= f.button :submit, "Save", class: "btn btn-success btn-sm" %>
-    <%= link_to "Cancel", "#", class: "btn btn-secondary btn-sm cancel-edit-spot", data: { spot_id: spot.id } %>
-    <%= link_to "Delete", spot_path(spot), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this spot?", turbo_stream: true }, class: "btn btn-danger btn-sm" %>
-  </div>
-<% end %> 
+<turbo-frame id="spot_<%= spot.id %>">
+  <%= simple_form_for spot, html: { id: "edit-spot-form-#{spot.id}" } do |f| %>
+    <%= f.input :description %>
+    <%= f.input :category %>
+    <div style="margin-top: 8px; display: flex; justify-content: flex-end; gap: 8px;">
+      <%= f.button :submit, "Save", class: "btn btn-success btn-sm" %>
+      <%= link_to "Cancel", "#", class: "btn btn-secondary btn-sm cancel-edit-spot", data: { spot_id: spot.id } %>
+      <%= link_to "Delete", spot_path(spot), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this spot?", turbo_stream: true }, class: "btn btn-danger btn-sm" %>
+    </div>
+  <% end %>
+</turbo-frame>
