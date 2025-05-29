@@ -12,22 +12,27 @@ class BookingsController < ApplicationController
   def approve
     @booking = Booking.find(params[:id])
     @booking.update(status: "approved")
-    @bookings = current_user.bookings
-    @spots = current_user.spots
-    @my_spot_bookings = Booking.joins(:spot).where(spots: { user_id: current_user.id })
-    render 'profiles/show'  end
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to request.referer || root_path, notice: "Booking approved!" }
+    end
+  end
 
   def decline
     @booking = Booking.find(params[:id])
     @booking.update(status: "declined")
-    @bookings = current_user.bookings
-    @spots = current_user.spots
-    @my_spot_bookings = Booking.joins(:spot).where(spots: { user_id: current_user.id })
-    render 'profiles/show'  end
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to request.referer || root_path, notice: "Booking declined!" }
+    end
+  end
 
   def new
     @spot = Spot.find(params[:spot_id])
     @booking = Booking.new
+    @booked_dates = @spot.bookings.pluck(:start_date, :end_date).flat_map do |start_date, end_date|
+      (start_date.to_date..end_date.to_date).to_a
+    end
   end
 
   def create
