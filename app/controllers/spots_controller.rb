@@ -43,12 +43,16 @@ class SpotsController < ApplicationController
   def update
     if @spot.update(spot_params)
       respond_to do |format|
-        format.js   # renders update.js.erb
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace("spot_#{@spot.id}", partial: "spots/card", locals: { spot: @spot })
+        }
         format.html { redirect_to profile_path(anchor: "my-spots") }
       end
     else
       respond_to do |format|
-        format.js   # renders update.js.erb with errors
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace("spot_#{@spot.id}", partial: "spots/form", locals: { spot: @spot })
+        }
         format.html { render :edit }
       end
     end
