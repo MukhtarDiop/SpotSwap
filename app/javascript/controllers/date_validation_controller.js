@@ -1,26 +1,25 @@
 import { Controller } from "@hotwired/stimulus"
+import flatpickr from "flatpickr"
 
 export default class extends Controller {
-  static targets = ["startDate", "endDate", "hint"]
+  static targets = ["startDate", "endDate"]
+  static values = { bookedDates: Array }
 
-  validate() {
-    const selected = new Date(this.startDateTarget.value)
-    const today = new Date()
-    today.setHours(0,0,0,0)
-    if (selected < today) {
-      this.hintTarget.style.display = "inline"
-    } else {
-      this.hintTarget.style.display = "none"
-    }
+  connect() {
+    flatpickr(this.startDateTarget, {
+      minDate: "today",
+      disable: this.bookedDatesValue,
+      onChange: this.updateEndDateMin.bind(this)
+    })
+    flatpickr(this.endDateTarget, {
+      minDate: "today",
+      disable: this.bookedDatesValue
+    })
   }
 
-  updateEndDateMin() {
-    if (this.startDateTarget.value) {
-      this.endDateTarget.min = this.startDateTarget.value
-      // Optionally, clear end date if it's before the new min
-      if (this.endDateTarget.value && this.endDateTarget.value < this.startDateTarget.value) {
-        this.endDateTarget.value = ""
-      }
+  updateEndDateMin(selectedDates) {
+    if (selectedDates.length > 0) {
+      this.endDateTarget._flatpickr.set("minDate", selectedDates[0])
     }
   }
 } 

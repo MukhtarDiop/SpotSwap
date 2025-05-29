@@ -1,4 +1,6 @@
-<div class="container" data-controller="date-validation">
+<div class="container"
+     data-controller="date-validation"
+     data-date-validation-booked-dates-value='<%= @booked_dates.map(&:to_s).to_json %>'>
   <h1>Request Booking</h1>
   <p>Select the start and end dates for your booking at <strong><%= @spot.description %></strong></p>
   
