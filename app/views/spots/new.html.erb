@@ -2,7 +2,8 @@
     <h1>New Spot</h1>
     <%= simple_form_for @spot do |f| %>
         <%= f.input :description %>
-        <%= f.input :category, as: :select, collection: ['storage', 'parking space', 'garage'] %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+        <%= f.input :category, as: :select, collection: ['storage', 'parking', 'garage'] %>
         <%= f.input :length %>
         <%= f.input :width %>
         <%= f.input :height %>

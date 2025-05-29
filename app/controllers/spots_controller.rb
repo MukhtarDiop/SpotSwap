@@ -29,16 +29,44 @@ class SpotsController < ApplicationController
 
   def create
     @spot = Spot.new(spot_params)
-    @user = current_user
     @spot.user = current_user
-    @spot.save
-    redirect_to spot_path(@spot)
+    if @spot.save
+      redirect_to spot_path(@spot)
+    else
+      logger.debug @spot.errors.full_messages
+      render :new, status: :unprocessable_entity
+    end
+  
+  end
+
+  def update
+    @spot = Spot.find(params[:id])
+    if @spot.update(spot_params)
+      respond_to do |format|
+        format.js   # renders update.js.erb
+        format.html { redirect_to profile_path(anchor: "my-spots") }
+      end
+    else
+      respond_to do |format|
+        format.js   # renders update.js.erb with errors
+        format.html { render :edit }
+      end
+    end
+  end
+
+  def destroy
+    @spot = Spot.find(params[:id])
+    @spot.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("spot_#{@spot.id}") }
+      format.html { redirect_to profile_path(anchor: "my-spots"), notice: "Spot deleted." }
+    end
   end
 
   private
 
   def spot_params
-    params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category, :rate)
+    params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category, :rate, photos: [])
   end
 
 end
