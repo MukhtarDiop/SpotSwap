@@ -23,6 +23,7 @@ class SpotsController < ApplicationController
   end
 
   def show
+    @already_booked = user_signed_in? && Booking.exists?(user: current_user, spot: @spot, status: "pending")
   end
 
   def new
