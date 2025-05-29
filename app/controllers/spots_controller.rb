@@ -5,6 +5,15 @@ class SpotsController < ApplicationController
 
   def index
     @spots = Spot.all
+    # This part related to the map to pass more info about the spots to the view
+    @markers = @spots.geocoded.map do |spot|
+      {
+    lat: spot.latitude,
+    lng: spot.longitude,
+    info_window_html: render_to_string(partial: "info_window", locals: { spot: spot }),
+    image_url: helpers.asset_url("https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748375631/ChatGPT_Image_May_27_2025_at_02_53_12_PM_iz8dcr.png")
+  }
+    end
     if params[:location].present?
       @spots = @spots.where("description ILIKE ? OR category ILIKE ?", "%#{params[:location]}%", "%#{params[:location]}%")
       # If you have an address or city field, use that instead!
@@ -13,12 +22,6 @@ class SpotsController < ApplicationController
     if params[:start_date].present? && params[:end_date].present?
       # Add your date filtering logic here, e.g., exclude spots that are booked in this range
       # This is a placeholder; actual logic depends on your booking model
-    end
-    @markers = @spots.geocoded.map do |spot|
-        {
-          lat: spot.latitude,
-          lng: spot.longitude
-        }
     end
   end
 
