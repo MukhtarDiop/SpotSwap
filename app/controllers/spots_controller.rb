@@ -21,7 +21,7 @@ class SpotsController < ApplicationController
   end
 
   def show
-    @spots = Spot.where.not(user_id: current_user.id).order(created_at: :desc)
+   @spot = Spot.find(params[:id])
   end
 
   def new
