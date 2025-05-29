@@ -4,15 +4,10 @@ class SpotsController < ApplicationController
   before_action :authorize_spot_owner, only: [:update, :destroy]
 
   def index
-    @spots = Spot.all
-    # This part related to the map to pass more info about the spots to the view
-    @markers = @spots.geocoded.map do |spot|
-      {
-    lat: spot.latitude,
-    lng: spot.longitude,
-    info_window_html: render_to_string(partial: "info_window", locals: { spot: spot }),
-    image_url: helpers.asset_url("https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748375631/ChatGPT_Image_May_27_2025_at_02_53_12_PM_iz8dcr.png")
-  }
+    if current_user
+      @spots = Spot.where.not(user_id: current_user.id).order(created_at: :desc)
+    else
+      @spots = Spot.order(created_at: :desc)
     end
     if params[:location].present?
       @spots = @spots.where("description ILIKE ? OR category ILIKE ?", "%#{params[:location]}%", "%#{params[:location]}%")
@@ -26,6 +21,7 @@ class SpotsController < ApplicationController
   end
 
   def show
+    @spots = Spot.where.not(user_id: current_user.id).order(created_at: :desc)
   end
 
   def new
