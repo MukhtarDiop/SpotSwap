@@ -33,26 +33,22 @@
   <h2 class="featured-title">Featured Storage Spaces</h2>
   <p class="featured-subtitle">Discover popular spaces in your area</p>
   <div class="featured-spots-slider">
-    <div class="featured-spot-card">
-      <div class="featured-spot-photo">
-        <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
-      </div>
-      <div class="featured-spot-info">
-        <div class="featured-spot-header">
-          <span class="featured-spot-name">Spacious Garage</span>
-          <span class="featured-spot-rating">★ 4.9</span>
+  <div class="featured-spots-container">
+      <div class="featured-spot-card">
+        <div class="featured-spot-photo">
+          <img src="https://www.thestoragebox.com/media/ocnhdedp/10-ft-shipping.png" alt="Spot Photo" class="featured-spot-img" />
         </div>
         <div class="featured-spot-meta">📍 Downtown Seattle • 200 sq ft</div>
         <div class="featured-spot-desc">Perfect for furniture, boxes, and seasonal items. Climate controlled and secure.</div>
         <div class="featured-spot-footer">
           <span class="featured-spot-price">$45/day</span>
-          <button class="btn">Book</button>
+          <%= link_to "Book", spots_path, class: "btn" %>
         </div>
       </div>
     </div>
     <div class="featured-spot-card">
       <div class="featured-spot-photo">
-        <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
+        <img src="https://www.thestoragebox.com/media/ocnhdedp/10-ft-shipping.png" alt="Spot Photo" class="featured-spot-img" />
       </div>
       <div class="featured-spot-info">
         <div class="featured-spot-header">
@@ -63,13 +59,13 @@
         <div class="featured-spot-desc">Clean, dry basement space. Great for long-term storage needs.</div>
         <div class="featured-spot-footer">
           <span class="featured-spot-price">$30/day</span>
-          <button class="btn">Book</button>
+          <%= link_to "Book", spots_path, class: "btn" %>
         </div>
       </div>
     </div>
     <div class="featured-spot-card">
       <div class="featured-spot-photo">
-        <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
+        <img src="https://www.thestoragebox.com/media/ocnhdedp/10-ft-shipping.png" alt="Spot Photo" class="featured-spot-img" />
       </div>
       <div class="featured-spot-info">
         <div class="featured-spot-header">
@@ -80,15 +76,15 @@
         <div class="featured-spot-desc">Professional storage facility with 24/7 access and security.</div>
         <div class="featured-spot-footer">
           <span class="featured-spot-price">$25/day</span>
-          <button class="btn">Book</button>
+          <%= link_to "Book", spots_path, class: "btn" %>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
 <div class="cta-section">
-  <h2>Ready to get started?</h2>
-  <button class="btn btn-light">Get Started</button>
+  <h1>Ready to get started?</h1>
+  <%= link_to "Browse our Spaces", spots_path, class: "btn btn-primary" %>
 </div>
-
