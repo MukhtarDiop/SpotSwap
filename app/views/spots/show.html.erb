@@ -4,7 +4,8 @@
         <% @spot.photos.each do |photo| %>
             <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid mb-3" %>
         <% end %>
-        <h2><%= @spot.description%></h2>
+        <h2><%= @spot.title%></h2>
+        <h3><%= @spot.description%></h3>
         <p>hosted by - <%= @spot.user.first_name%> <%= @spot.user.last_name%></p>
         <p>Location: <%= @spot.latitude%> <%= @spot.longitude%></p>
         <p>Rate: <%= @spot.rate%> per day</p>
