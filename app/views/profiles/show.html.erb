@@ -40,27 +40,18 @@
     <% end %>
     <%= link_to "Add a new spot", new_spot_path, class: "btn btn-primary btn-sm" %>
   </div>
-  <div class="tab-content" id="myspotbookings-tab" style="display:none;">
-    <% if @my_spot_bookings && @my_spot_bookings.any? %>
-      <% @my_spot_bookings.each do |booking| %>
-        <div class="profile-card" style="border:1px solid #eee; border-radius:8px; padding:16px; margin-bottom:16px; background:#fff;">
-          <strong>Spot:</strong> <%= booking.spot.description %><br>
-          <strong>Renter:</strong> <%= booking.user.email %><br>
-          <strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %><br>
-          <strong>Status:</strong> <%= booking.status&.capitalize || 'Pending' %><br>
-          <% if booking.status == "pending" %>
-            <div id="booking-<%= booking.id %>-actions" style="margin-top: 16px; display: flex; gap: 16px;">
-              <%= button_to "Approve", approve_booking_path(booking), method: :patch, class: "btn btn-success booking-approve-btn", data: { booking_id: booking.id }, form: { style: "display:inline;" } %>
-              <%= button_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-danger booking-decline-btn", data: { booking_id: booking.id }, form: { style: "display:inline;" } %>
-            </div>
-          <% end %>
-        </div>
+ <div class="tab-content" id="myspotbookings-tab" style="display:none;">
+  <% if @my_spot_bookings && @my_spot_bookings.any? %>
+    <% @my_spot_bookings.each do |booking| %>
+      <%= turbo_frame_tag dom_id(booking) do %>
+        <%= render "profiles/booking_card", booking: booking %>
       <% end %>
-    <% else %>
-      <p>No bookings for your spots yet.</p>
     <% end %>
-  </div>
+  <% else %>
+    <p>No bookings for your spots yet.</p>
+  <% end %>
 </div>
+
 
 
 <script>

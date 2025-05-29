@@ -1,0 +1,13 @@
+<turbo-frame id="spot_<%= spot.id %>">
+  <div class="profile-card" style="position: relative;">
+    <% if params[:edit_spot_id].to_i == spot.id %>
+      <%= render 'spots/form', spot: spot %>
+    <% else %>
+      <div style="position: absolute; top: 16px; right: 16px;">
+        <%= link_to "Edit", profile_path(edit_spot_id: spot.id), data: { turbo_frame: "spot_#{spot.id}" }, class: "btn btn-warning btn-sm" %>
+      </div>
+      <strong>Description:</strong> <%= spot.description %><br>
+      <strong>Category:</strong> <%= spot.category %>
+    <% end %>
+  </div>
+</turbo-frame>

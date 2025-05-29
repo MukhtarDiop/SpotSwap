@@ -6,7 +6,8 @@ class Spot < ApplicationRecord
   has_many_attached :photos
   CATEGORIES = ['storage', 'parking', 'garage']
 
-  validates :description, presence: true
+  validates :description, presence: true, length: { maximum: 120 }
+  validates :title, presence: true, length: { maximum: 30 }
   validates :address, presence: true
   validates :length, presence: true
   validates :length, numericality: true
