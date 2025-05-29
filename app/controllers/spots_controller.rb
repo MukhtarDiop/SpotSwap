@@ -4,7 +4,11 @@ class SpotsController < ApplicationController
   before_action :authorize_spot_owner, only: [:update, :destroy]
 
   def index
-     @spots = Spot.where.not(user_id: current_user.id)
+    if current_user
+      @spots = Spot.where.not(user_id: current_user.id).order(created_at: :desc)
+    else
+      @spots = Spot.order(created_at: :desc)
+    end
     if params[:location].present?
       @spots = @spots.where("description ILIKE ? OR category ILIKE ?", "%#{params[:location]}%", "%#{params[:location]}%")
       # If you have an address or city field, use that instead!
