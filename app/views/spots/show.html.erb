@@ -10,6 +10,7 @@
         <p>Location: <%= @spot.latitude%> <%= @spot.longitude%></p>
         <p>Rate: <%= @spot.rate%> per day</p>
         <p>Dimensions: <%= @spot.length%>' X <%= @spot.width%>' X <%= @spot.height%>'  </p>
+        <%= link_to "Book Now", new_spot_booking_path(@spot), class: "btn btn-primary" %>
     </div>
 
 </div>
