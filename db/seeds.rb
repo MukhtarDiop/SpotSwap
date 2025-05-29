@@ -1,26 +1,25 @@
-puts "Cleaning the database"
+puts "Cleaning the database 🧼"
 Booking.destroy_all
 Spot.destroy_all
 User.destroy_all
+puts "Finished cleaning the database ✨"
 
-puts "Creating users."
+puts "Creating users 👯"
 # Create a test user if none exists
 user = User.create!(
-  first_name: "Test",
-  last_name: "User",
+  first_name: "Tom",
+  last_name: "Jones",
   email: "test@example.com",
   password: "password"
 )
+puts "Finish creating user one "
 
 # Create a second user
-second_user = User.create!(
-  first_name: "Renter",
-  last_name: "User",
-  email: "renter@example.com",
-  password: "password"
-)
+puts "Finish creating user two"
+# Create a third user
+puts "Finish creating user three"
 
-puts "Creating a spot"
+puts "Creating spots"
 # Create a spot if none exists
 spot = Spot.create!(
   description: "Test Storage Spot",
