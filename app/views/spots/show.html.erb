@@ -6,10 +6,9 @@
         <% end %>
         <h2><%= @spot.description%></h2>
         <p>hosted by - <%= @spot.user.first_name%> <%= @spot.user.last_name%></p>
-        <p>Location: <%= @spot.lat%> <%= @spot.long%></p>
+        <p>Location: <%= @spot.latitude%> <%= @spot.longitude%></p>
         <p>Rate: <%= @spot.rate%> per day</p>
         <p>Dimensions: <%= @spot.length%>' X <%= @spot.width%>' X <%= @spot.height%>'  </p>
     </div>
 
 </div>
-

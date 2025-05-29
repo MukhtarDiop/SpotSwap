@@ -1,14 +1,13 @@
 class Spot < ApplicationRecord
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
   belongs_to :user
   has_many :bookings, dependent: :destroy
   has_many_attached :photos
   CATEGORIES = ['storage', 'parking', 'garage']
 
   validates :description, presence: true
-  validates :lat, presence: true
-  validates :lat, numericality: true
-  validates :long, presence: true
-  validates :long, numericality: true
+  validates :address, presence: true
   validates :length, presence: true
   validates :length, numericality: true
   validates :width, presence: true
