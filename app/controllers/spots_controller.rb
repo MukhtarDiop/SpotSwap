@@ -37,7 +37,7 @@ class SpotsController < ApplicationController
       logger.debug @spot.errors.full_messages
       render :new, status: :unprocessable_entity
     end
-  
+
   end
 
   def update
@@ -62,14 +62,14 @@ class SpotsController < ApplicationController
       format.turbo_stream { render turbo_stream: turbo_stream.remove("spot_#{@spot.id}") }
       format.html { redirect_to profile_path(anchor: "my-spots"), notice: "Spot deleted." }
     end
-    
+
   end
 
   private
 
   def spot_params
 
-    params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category, :rate, :address, :photos :title [])
+    params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category, :rate, :title, :address, :photos [])
 
   end
 
