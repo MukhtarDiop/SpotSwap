@@ -29,16 +29,18 @@ class SpotsController < ApplicationController
 
   def create
     @spot = Spot.new(spot_params)
-    @user = current_user
     @spot.user = current_user
-    @spot.save
-    redirect_to spot_path(@spot)
+    if @spot.save
+      redirect_to spot_path(@spot)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
 
   def spot_params
-    params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category, :rate)
+    params.require(:spot).permit(:description, :lat, :long, :length, :width, :height, :category, :rate, :title)
   end
 
 end

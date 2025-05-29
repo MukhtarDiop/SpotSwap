@@ -1,12 +1,25 @@
 <div class="container">
-    <h1>New Spot</h1>
-    <%= simple_form_for @spot do |f| %>
-        <%= f.input :description %>
-        <%= f.input :category, as: :select, collection: ['storage', 'parking space', 'garage'] %>
-        <%= f.input :length %>
-        <%= f.input :width %>
-        <%= f.input :height %>
-        <%= f.input :rate %>
-        <%= f.submit %>
+  <h1>New Spot</h1>
+
+  <%= simple_form_for @spot do |f| %>
+    <% if @spot.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@spot.errors.count, "error") %> prohibited this spot from being saved:</h2>
+        <ul>
+          <% @spot.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
+
+    <%= f.input :title, input_html: { maxlength: 30 }%>
+    <%= f.input :description, input_html: { maxlength: 120 } %>
+    <%= f.input :category, as: :select, collection: Spot::CATEGORIES %>
+    <%= f.input :length %>
+    <%= f.input :width %>
+    <%= f.input :height %>
+    <%= f.input :rate %>
+    <%= f.submit %>
+  <% end %>
 </div>
