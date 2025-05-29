@@ -1,14 +1,25 @@
-<div class="container">
-    <h1>Spots </h1>
-    <div class="mt-4">
-        <% @spot.photos.each do |photo| %>
-            <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid mb-3" %>
-        <% end %>
-        <h2><%= @spot.description%></h2>
-        <p>hosted by - <%= @spot.user.first_name%> <%= @spot.user.last_name%></p>
-        <p>Location: <%= @spot.latitude%> <%= @spot.longitude%></p>
-        <p>Rate: <%= @spot.rate%> per day</p>
-        <p>Dimensions: <%= @spot.length%>' X <%= @spot.width%>' X <%= @spot.height%>'  </p>
+<div class="container" style="max-width: 600px; margin: 0 auto;">
+  <div class="spot-card" style="background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 32px 24px; margin-top: 32px; min-width: 400px; max-width: 700px;">
+    <% if @spot.photos.any? %>
+      <div style="text-align: center;">
+        <%= cl_image_tag @spot.photos.first.key, height: 300, width: 400, crop: :fill, class: "img-fluid mb-3", style: "border-radius: 12px; object-fit: cover; max-width: 100%;" %>
+      </div>
+    <% end %>
+    <h2 style="font-size: 1.7rem; font-weight: 600; margin-top: 16px; margin-bottom: 8px; max-width: 32ch; white-space: nowrap; overflow: hidden; text-overflow: clip;">
+      <%= @spot.title.presence || @spot.description.truncate(40) %>
+    </h2>
+    <p style="color: #666; font-size: 1.1rem; margin-bottom: 8px; word-break: break-word; max-width: 100%;"><%= @spot.description %></p>
+    <div style="margin-bottom: 12px;">
+      <span style="font-weight: 500;">Hosted by:</span> <%= @spot.user.first_name %> <%= @spot.user.last_name %>
     </div>
-
+    <div style="margin-bottom: 8px;">
+      <span style="font-weight: 500;">Location:</span> <%= @spot.address %>
+    </div>
+    <div style="margin-bottom: 8px;">
+      <span style="font-weight: 500;">Rate:</span> $<%= number_with_precision(@spot.rate, precision: 2) %> per day
+    </div>
+    <div style="margin-bottom: 8px;">
+      <span style="font-weight: 500;">Dimensions:</span> <%= @spot.length %>' X <%= @spot.width %>' X <%= @spot.height %>'
+    </div>
+  </div>
 </div>
