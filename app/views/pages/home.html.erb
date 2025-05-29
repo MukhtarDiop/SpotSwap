@@ -32,10 +32,10 @@
 <div class="featured-spots-section">
   <h2 class="featured-title">Featured Storage Spaces</h2>
   <p class="featured-subtitle">Discover popular spaces in your area</p>
-  <div class="featured-spots-slider">
+  <div class="featured-spots-slider row">
   
-  <div class="featured-spots-container">
-    <% @spots.each do |spot| %>
+  <div class="featured-spots-container col-5">
+    <% @spots.limit(6).each do |spot| %>
       <div class="featured-spot-card">
         <div class="featured-spot-photo">
           <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
