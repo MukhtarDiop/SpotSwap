@@ -21,10 +21,19 @@
   <div class="tab-content" id="spots-tab" style="display:none;">
     <% if @spots.any? %>
       <% @spots.each do |spot| %>
-        <div class="profile-card">
-          <strong>Description:</strong> <%= spot.description %><br>
-          <strong>Category:</strong> <%= spot.category %>
-        </div>
+        <turbo-frame id="spot_<%= spot.id %>">
+          <div class="profile-card" style="position: relative;">
+            <% if params[:edit_spot_id].to_i == spot.id %>
+              <%= render 'spots/form', spot: spot %>
+            <% else %>
+              <div style="position: absolute; top: 16px; right: 16px;">
+                <%= link_to "Edit", profile_path(edit_spot_id: spot.id), data: { turbo_frame: "spot_#{spot.id}" }, class: "btn btn-warning btn-sm" %>
+              </div>
+              <strong>Description:</strong> <%= spot.description %><br>
+              <strong>Category:</strong> <%= spot.category %>
+            <% end %>
+          </div>
+        </turbo-frame>
       <% end %>
     <% else %>
       <p>No spots listed yet.</p>
@@ -66,6 +75,23 @@
   });
 
   document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.edit-spot-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var spotId = btn.dataset.spotId;
+        document.getElementById('spot-display-' + spotId).style.display = 'none';
+        document.getElementById('spot-edit-form-' + spotId).style.display = '';
+      });
+    });
+
+    document.querySelectorAll('.cancel-edit-spot').forEach(function(btn) {
+      btn.addEventListener('click', function(event) {
+        event.preventDefault();
+        var spotId = btn.dataset.spotId;
+        document.getElementById('spot-edit-form-' + spotId).style.display = 'none';
+        document.getElementById('spot-display-' + spotId).style.display = '';
+      });
+    });
+
     document.querySelectorAll('.booking-approve-btn, .booking-decline-btn').forEach(function(btn) {
       btn.addEventListener('click', function(event) {
         var bookingId = btn.dataset.bookingId;
@@ -90,5 +116,15 @@
         }
       });
     });
+
+    // Activate 'My Spots' tab if edit_spot_id is present in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('edit_spot_id')) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-tab="spots"]').classList.add('active');
+      document.getElementById('bookings-tab').style.display = 'none';
+      document.getElementById('spots-tab').style.display = '';
+      document.getElementById('myspotbookings-tab').style.display = 'none';
+    }
   });
 </script>
