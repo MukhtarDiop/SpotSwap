@@ -10,7 +10,7 @@ naika   = User.create!(email: "naika@example.com", password: "password", first_n
 mukhtar = User.create!(email: "mukhtar@example.com", password: "password", first_name: "Mukhtar", last_name: "N")
 mateo   = User.create!(email: "mateo@example.com", password: "password", first_name: "Mateo", last_name: "M")
 safwan  = User.create!(email: "safwan@example.com", password: "password", first_name: "Safwan", last_name: "A")
-davy    = User.create!(email: "davy@example.com", password: "password", first_name: "Devy", last_name: "D")
+davy    = User.create!(email: "davy@example.com", password: "password", first_name: "Davy", last_name: "D")
 
 puts "Creating additional test users... 🙋🏼"
 user1 = User.create!(email: "lena@example.com", password: "password", first_name: "Lena", last_name: "T")
