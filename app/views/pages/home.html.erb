@@ -1,4 +1,4 @@
-<div class="spots-logo-container">
+<%# <div class="spots-logo-container">
   <%= image_tag "https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748375631/ChatGPT_Image_May_27_2025_at_02_53_12_PM_iz8dcr.png", alt: "Logo", class: "spots-logo" %>
 </div>
 
@@ -6,12 +6,17 @@
   <div class="hero-content">
     <h1>Find Storage Space Anywhere</h1>
     <p>Rent unused garages, basements, and storage units from local owners. Safe, affordable, and convenient.</p>
-    <form class="hero-search" action="<%= spots_path %>" method="get">
-      <input type="text" name="location" placeholder="Enter location..." />
-      <input type="date" name="start_date" />
-      <input type="date" name="end_date" />
-      <button type="submit">Search</button>
-    </form>
+    <%= form_with url: spots_path, method: :get, class: "d-flex flex-wrap gap-3 align-items-center", local: true do |f| %>
+      <%= f.select :category, Spot::CATEGORIES, prompt: "Select category", class: "form-select rounded-pill px-3 py-2" %>
+
+      <%= f.text_field :location, placeholder: "Enter location", class: "form-control rounded-pill px-3 py-2" %>
+
+      <%= f.number_field :length,min: 0,placeholder: "Min length (m)", class: "form-control rounded-pill px-3 py-2" %>
+      <%= f.number_field :width, min: 0,placeholder: "Min width (m)", class: "form-control rounded-pill px-3 py-2" %>
+      <%= f.number_field :height,min: 0, placeholder: "Min height (m)", class: "form-control rounded-pill px-3 py-2" %>
+
+      <%= f.submit "Search", class: "btn btn-primary rounded-pill px-4 py-2" %>
+    <% end %>
     <div class="hero-stats">
       <div>
         <span class="stat-value">10,000+</span>
@@ -29,33 +34,30 @@
   </div>
 </div>
 
-<div class="featured-spots-section">
-  <h2 class="featured-title">Featured Storage Spaces</h2>
-  <p class="featured-subtitle">Discover popular spaces in your area</p>
-  <div class="featured-spots-slider row">
-  
-  <div class="featured-spots-container col-5">
-    <% @spots.limit(6).each do |spot| %>
-      <div class="featured-spot-card">
-        <div class="featured-spot-photo">
-          <img src="https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748379152/septic_rental_nm5nor.png" alt="Spot Photo" class="featured-spot-img" />
-        </div>
-        <div class="featured-spot-info">
-          <div class="featured-spot-header">
-            <h2><%= link_to(spot.title.present? ? spot.title : "Untitled Spot", spot_path(spot), class: "spot-title-link") %></h2>
-          </div>
-          <div class="featured-spot-meta">★ <%= spot.description %> </div>
-          <div class="featured-spot-meta">📍Lat: <%= spot.address %></div>
-          <div class="featured-spot-desc">Size: <%= spot.length %>m X <%= spot.height %>m X <%= spot.width %>m </div>
-           <div class="featured-spot-desc"><%= spot.category %></div>
-          <div class="featured-spot-footer">
-            <span class="featured-spot-price">$<%= spot.rate %>/day</span>
-             <%= link_to "Book", new_spot_booking_path(spot), class: "btn btn-primary" %>
+<div class="featured-spots-section" style="max-width: 1100px; margin: 48px auto 0 auto;">
+  <h2 class="featured-title text-center">Featured Storage Spaces</h2>
+  <p class="featured-subtitle text-center">Discover popular spaces in your area</p>
+  <div class="row justify-content-center">
+    <% @spots.select { |spot| spot.photos.attached? }.first(6).each do |spot| %>
+      <div class="col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
+        <div class="card h-100 shadow-sm">
+          <% if spot.photos.attached? %>
+            <%= cl_image_tag(spot.photos.first.key, class: "card-img-top", crop: :fill, style: 'height: 240px; object-fit: cover;') %>
+          <% end %>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title text-primary"><%= link_to(spot.title.presence || "Untitled Spot", spot_path(spot), class: "spot-title-link") %></h5>
+            <p class="card-text text-muted mb-1"><%= spot.category.capitalize %></p>
+            <p class="card-text"><%= truncate(spot.description, length: 60) %></p>
+            <p class="card-text mb-1"><strong>Location:</strong> <%= spot.address %></p>
+            <p class="card-text mb-2"><strong>Size:</strong> <%= spot.length %>m X <%= spot.width %>m X <%= spot.height %>m</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <span class="featured-spot-price text-success font-weight-bold">$<%= spot.rate %>/day</span>
+              <%= link_to "Book", new_spot_booking_path(spot), class: "btn btn-primary btn-sm" %>
+            </div>
           </div>
         </div>
       </div>
     <% end %>
-  </div>
   </div>
 </div>
  

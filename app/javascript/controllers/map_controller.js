@@ -1,45 +1,107 @@
 import { Controller } from "@hotwired/stimulus"
-import mapboxgl from 'mapbox-gl'
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
+import mapboxgl from "mapbox-gl"
 
-// Connects to data-controller="map"
 export default class extends Controller {
   static values = {
     apiKey: String,
     markers: Array
   }
-  connect() {
-    mapboxgl.accessToken = this.apiKeyValue
-    this.map = new mapboxgl.Map({
-      container: this.element,
-      style: "mapbox://styles/mapbox/streets-v10"
+
+connect() {
+  console.log("Map controller connected ✅");
+
+  mapboxgl.accessToken = this.apiKeyValue;
+
+  this.map = new mapboxgl.Map({
+    container: this.element,
+    style: "mapbox://styles/mapbox/streets-v11"
+  });
+
+  this.map.on("load", () => {
+    console.log("Mapbox loaded ✅");
+    this.addClusteredMarkers();
+  });
+}
+  addClusteredMarkers() {
+    const geojson = {
+      type: "FeatureCollection",
+      features: this.markersValue.map(marker => ({
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [marker.lng, marker.lat]
+        },
+        properties: {
+          infoWindow: marker.info_window_html
+        }
+      }))
+    }
+
+    this.map.addSource("spots", {
+      type: "geojson",
+      data: geojson,
+      cluster: true,
+      clusterMaxZoom: 14,
+      clusterRadius: 50
     })
-    this.#addMarkersToMap()
-    this.#fitMapToMarkers()
-    this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
-                                        mapboxgl: mapboxgl }))
+
+    // cluster circles
+    this.map.addLayer({
+      id: "clusters",
+      type: "circle",
+      source: "spots",
+      filter: ["has", "point_count"],
+      paint: {
+          "circle-color": "#fff", // gris très foncé
+          "text-color": "#ffffff",  // ✅ NOIR
+          "circle-radius": [
+            "step",
+            ["get", "point_count"],
+            20, 5,
+            30, 10,
+            40
+          ],
+          "circle-stroke-width": 1,
+          "circle-stroke-color": "#ffffff" // bord blanc
+        }
+    })
+
+    // cluster count
+    this.map.addLayer({
+      id: "cluster-count",
+      type: "symbol",
+      source: "spots",
+      filter: ["has", "point_count"],
+      layout: {
+        "text-field": "{point_count_abbreviated}",
+        "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+        "text-size": 14
+      }
+    })
+
+    // unclustered points
+    this.map.addLayer({
+      id: "unclustered-point",
+      type: "circle",
+      source: "spots",
+      filter: ["!", ["has", "point_count"]],
+      paint: {
+        "circle-color": "#000000",
+        "circle-radius": 6,
+        "circle-stroke-width": 2,
+        "circle-stroke-color": "#fff"
+      }
+    })
+
+    // popup on click
+    this.map.on("click", "unclustered-point", (e) => {
+      const coordinates = e.features[0].geometry.coordinates.slice()
+      const html = e.features[0].properties.infoWindow
+
+      new mapboxgl.Popup()
+        .setLngLat(coordinates)
+        .setHTML(html)
+        .addTo(this.map)
+    })
   }
-
-  #addMarkersToMap() {
-  this.markersValue.forEach((marker) => {
-    const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
-
-    const customMarker = document.createElement("div")
-    customMarker.className = "marker"
-    customMarker.style.backgroundImage = `url('${marker.image_url}')`
-    customMarker.style.backgroundSize = "contain"
-    customMarker.style.width = "60px"
-    customMarker.style.height = "60px"
-
-    new mapboxgl.Marker(customMarker) // pass customMarker here
-      .setLngLat([marker.lng, marker.lat])
-      .setPopup(popup)
-      .addTo(this.map)
-  })
-}
-  #fitMapToMarkers() {
-  const bounds = new mapboxgl.LngLatBounds()
-  this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
-  this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
-}
 }
