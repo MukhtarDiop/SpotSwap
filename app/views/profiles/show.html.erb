@@ -43,7 +43,9 @@
               <div style="position: absolute; top: 16px; right: 16px;">
                 <%= link_to "Edit", profile_path(edit_spot_id: spot.id), data: { turbo_frame: "spot_#{spot.id}" }, class: "btn btn-primary btn-sm" %>
               </div>
+              <strong>Spot:</strong> <span style="display:inline-block; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom;"> <%= spot.title %></span><br>
               <strong>Description:</strong> <span style="display:inline-block; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom;"> <%= spot.description %></span><br>
+              <strong>Address:</strong> <%= spot.address %><br>
               <strong>Category:</strong> <%= spot.category %><br>
               <%= link_to 'View Spot', spot_path(spot), target: '_blank', rel: 'noopener', style: 'font-size: 1rem; text-decoration: underline; color: #007bff; margin-top: 4px; display: inline-block;' %>
             <% end %>
