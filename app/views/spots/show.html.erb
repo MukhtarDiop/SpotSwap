@@ -9,12 +9,12 @@
       </div>
     <% end %>
 
-    <h2 style="font-size: 1.7rem; font-weight: 600; margin-top: 16px;">
+    <h2 style="font-size: 1.7rem; font-weight: 600; margin-top: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block;">
       <%= @spot.description %>
     </h2>
 
     <p>Hosted by - <%= @spot.user.first_name %> <%= @spot.user.last_name %></p>
-    <p>Location: <%= @spot.latitude %>, <%= @spot.longitude %></p>
+    <p>Location: <%= @spot.city.presence || @spot.address.presence || ("#{@spot.latitude}, #{@spot.longitude}") %></p>
     <p>Rate: $<%= number_with_precision(@spot.rate, precision: 2) %> per day</p>
     <p>Dimensions: <%= @spot.length %>' X <%= @spot.width %>' X <%= @spot.height %>'</p>
 
