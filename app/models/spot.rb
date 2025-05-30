@@ -22,8 +22,10 @@ class Spot < ApplicationRecord
   }, allow_nil: true
   validates :category, presence: true, inclusion: { in: CATEGORIES }
   validates :rate, presence: true, numericality: { 
-    greater_than: 0, message: "cannot be zero or negative", 
-    less_than_or_equal_to: 30, too_high: "cannot be over $30"
+    greater_than: 0, message: "cannot be zero or negative"
+  }
+  validates :rate, numericality: { 
+    less_than_or_equal_to: 30, message: "cannot be over $30"
   }
 
   def city
