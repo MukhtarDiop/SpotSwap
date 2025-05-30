@@ -9,7 +9,10 @@
         <div class="card spot-card h-100">
           <div class="card-body">
             <%= cl_image_tag(spot.photos.first.key, class: "img-fluid rounded-top", crop: :fill) if spot.photos.attached? %>
-            <h5 class="card-title"><%= link_to spot.title, spot_path(spot) %></h5>
+            <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block;">
+              <%= link_to spot.title, spot_path(spot) %>
+            </h5>
+            <p class="card-city text-secondary mb-1" style="font-size: 1rem;"><%= spot.city.presence || spot.address %></p>
             <p class="card-subtitle">
               <%= spot.category.capitalize %>
             </p>
