@@ -2,6 +2,7 @@
   <%= simple_form_for spot, html: { id: "edit-spot-form-#{spot.id}" } do |f| %>
     <%= f.input :description %>
     <%= f.input :category %>
+    <%= f.input :rate, label: 'Price per night ($)' %>
     <div style="margin-top: 8px; display: flex; justify-content: flex-end; gap: 8px;">
       <%= f.button :submit, "Save", class: "btn btn-success btn-sm" %>
       <%= link_to "Cancel", "#", class: "btn btn-secondary btn-sm cancel-edit-spot", data: { spot_id: spot.id } %>
