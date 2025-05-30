@@ -1,6 +1,6 @@
 <div class="container" style="max-width: 600px; margin: 0 auto;">
   <div class="spot-card" style="background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 32px 24px; margin-top: 32px; min-width: 400px; max-width: 700px;">
-    
+
     <% if @spot.photos.any? %>
       <div style="text-align: center;">
         <% @spot.photos.each do |photo| %>
@@ -10,13 +10,17 @@
     <% end %>
 
     <h2 style="font-size: 1.7rem; font-weight: 600; margin-top: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block;">
-      <%= @spot.description %>
+      <%= @spot.title %>
     </h2>
+    <h5>
+      <%= @spot.description %>
+    </h5>
+    <br>
 
-    <p>Hosted by - <%= @spot.user.first_name %> <%= @spot.user.last_name %></p>
-    <p>Location: <%= @spot.city.presence || @spot.address.presence || ("#{@spot.latitude}, #{@spot.longitude}") %></p>
-    <p>Rate: $<%= number_with_precision(@spot.rate, precision: 2) %> per day</p>
-    <p>Dimensions: <%= @spot.length %>' X <%= @spot.width %>' X <%= @spot.height %>'</p>
+    <p class="font-weight-bold">Hosted by - <%= @spot.user.first_name %> <%= @spot.user.last_name %></p>
+    <p class="font-weight-bold">Location: <%= @spot.city.presence || @spot.address.presence || ("#{@spot.latitude}, #{@spot.longitude}") %></p>
+    <p class="font-weight-bold">Rate: $<%= number_with_precision(@spot.rate, precision: 2) %> per day</p>
+    <p class="font-weight-bold">Dimensions: <%= @spot.length %>' X <%= @spot.width %>' X <%= @spot.height %>'</p>
 
     <div style="margin-top: 16px;">
       <% if user_signed_in? && @already_booked %>
@@ -25,6 +29,6 @@
         <%= link_to "Book Now", new_spot_booking_path(@spot), class: "btn btn-primary" %>
       <% end %>
     </div>
-    
+
   </div>
 </div>

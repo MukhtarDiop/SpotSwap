@@ -1,6 +1,6 @@
 <div class="profile-card" style="border:1px solid #eee; border-radius:8px; padding:16px; margin-bottom:16px; background:#fff;">
   <strong>Spot:</strong> <span style="display:inline-block; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom;"> <%= booking.spot.description %></span><br>
-  <strong>Renter:</strong> <%= booking.user.email %><br>
+  <strong>Renter:</strong> <%= booking.user.first_name %> <%= booking.user.last_name %><br>
   <strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %><br>
   <strong>Status:</strong> <%= booking.status&.capitalize || 'Pending' %><br>
   <strong>Total Price:</strong> $<%= number_with_precision(booking.total_price, precision: 2) %><br>
@@ -10,4 +10,4 @@
       <%= button_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-danger booking-decline-btn", data: { booking_id: booking.id }, form: { style: "display:inline;" } %>
     </div>
   <% end %>
-</div> 
+</div>
