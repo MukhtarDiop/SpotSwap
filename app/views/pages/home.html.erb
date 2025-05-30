@@ -6,17 +6,42 @@
   <div class="hero-content">
     <h1>Find Storage Space Anywhere</h1>
     <p>Rent unused garages, basements, and storage units from local owners. Safe, affordable, and convenient.</p>
-    <%= form_with url: spots_path, method: :get, class: "d-flex flex-wrap gap-3 align-items-center", local: true do |f| %>
-      <%= f.select :category, Spot::CATEGORIES, prompt: "Select category", class: "form-select rounded-pill px-3 py-2" %>
+    <div class="container my-4 d-flex justify-content-center">
+      <div class="w-100" style="max-width: 600px;">
+        <%= form_with url: spots_path, method: :get, local: true do |f| %>
 
-      <%= f.text_field :location, placeholder: "Enter location", class: "form-control rounded-pill px-3 py-2" %>
+          <!-- Category (Full Width) -->
+          <div class="mb-3">
+            <%= f.select :category, Spot::CATEGORIES, prompt: "Select category", class: "form-select rounded-pill px-3 py-2 w-100" %>
+          </div>
 
-      <%= f.number_field :length,min: 0,placeholder: "Min length (m)", class: "form-control rounded-pill px-3 py-2" %>
-      <%= f.number_field :width, min: 0,placeholder: "Min width (m)", class: "form-control rounded-pill px-3 py-2" %>
-      <%= f.number_field :height,min: 0, placeholder: "Min height (m)", class: "form-control rounded-pill px-3 py-2" %>
+          <!-- Location (Full Width) -->
+          <div class="mb-3">
+            <%= f.text_field :location, placeholder: "Enter location", class: "form-control rounded-pill px-3 py-2 w-100" %>
+          </div>
 
-      <%= f.submit "Search", class: "btn btn-primary rounded-pill px-4 py-2" %>
-    <% end %>
+          <!-- Dimensions (Length, Width, Height) -->
+          <div class="row g-2 mb-3">
+            <div class="col">
+              <%= f.number_field :length, min: 0, placeholder: "Min length (m)", class: "form-control rounded-pill px-3 py-2" %>
+            </div>
+            <div class="col">
+              <%= f.number_field :width, min: 0, placeholder: "Min width (m)", class: "form-control rounded-pill px-3 py-2" %>
+            </div>
+            <div class="col">
+              <%= f.number_field :height, min: 0, placeholder: "Min height (m)", class: "form-control rounded-pill px-3 py-2" %>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center">
+            <%= f.submit "Search", class: "btn btn-primary rounded-pill px-4 py-2" %>
+          </div>
+
+        <% end %>
+      </div>
+  </div>
+
     <%# <div class="hero-stats">
       <div>
         <span class="stat-value">10,000+</span>
