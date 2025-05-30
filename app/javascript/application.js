@@ -3,7 +3,3 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
-import FilterController from "./controllers/filter_controller"
-
-const application = Application.start()
-application.register("filter", FilterController)
