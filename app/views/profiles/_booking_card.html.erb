@@ -1,7 +1,7 @@
 <div class="profile-card" style="border:1px solid #eee; border-radius:8px; padding:16px; margin-bottom:16px; background:#fff;">
   <strong>Spot:</strong> <span style="display:inline-block; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom;"> <%= booking.spot.description %></span><br>
   <strong>Renter:</strong> <%= booking.user.first_name %> <%= booking.user.last_name %><br>
-  <strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %><br>
+  <strong>Dates:</strong> Start: <%= booking.start_date.strftime('%B %-d, %Y') %> &nbsp; End: <%= booking.end_date.strftime('%B %-d, %Y') %>
   <strong>Status:</strong> <%= booking.status&.capitalize || 'Pending' %><br>
   <strong>Total Price:</strong> $<%= number_with_precision(booking.total_price, precision: 2) %><br>
   <% if defined?(show_actions) && show_actions && booking.status == "pending" %>
