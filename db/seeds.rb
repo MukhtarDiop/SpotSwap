@@ -276,7 +276,7 @@ spot18 = Spot.create!(
   user: user4
 )
 file = URI.open("https://images.unsplash.com/photo-1608626057093-91eb066ae1a3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-spot17.photos.attach(io: file, filename: "vancouver_garage.png", content_type: "image/png")
+spot18.photos.attach(io: file, filename: "vancouver_garage.png", content_type: "image/png")
 
 puts "Creating bookings... 🧟"
 

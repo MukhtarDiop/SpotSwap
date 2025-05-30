@@ -19,7 +19,7 @@
 
     <p class="font-weight-bold">Hosted by - <%= @spot.user.first_name %> <%= @spot.user.last_name %></p>
     <p class="font-weight-bold">Location: <%= @spot.city.presence || @spot.address.presence || ("#{@spot.latitude}, #{@spot.longitude}") %></p>
-    <p class="font-weight-bold">Rate: $<%= number_with_precision(@spot.rate, precision: 2) %> per day</p>
+    <p class="font-weight-bold">Rate:</strong> <%= number_to_currency @spot.rate %> / day</p>
     <p class="font-weight-bold">Dimensions: <%= @spot.length %>' X <%= @spot.width %>' X <%= @spot.height %>'</p>
 
     <div style="margin-top: 16px;">
