@@ -1,8 +1,13 @@
 <div class="container"
-     data-controller="date-validation"
-     data-date-validation-booked-dates-value='<%= @booked_dates.map(&:to_s).to_json %>'>
+     data-controller="date-validation price"
+     data-date-validation-booked-dates-value='<%= @booked_dates.map(&:to_s).to_json %>'
+     data-price-rate-value="<%= @spot.rate %>">
   <h1>Request Booking</h1>
   <p>Select the start and end dates for your booking at <strong><%= @spot.description %></strong></p>
+
+  <div class="mb-3">
+    <strong>Price per night:</strong> $<%= number_with_precision(@spot.rate, precision: 2) %>
+  </div>
   
   <% if @booking.errors.any? %>
     <div class="alert alert-danger">
@@ -22,15 +27,21 @@
                   type: "date",
                   min: Date.current.to_s,
                   "data-date-validation-target": "startDate",
-                  "data-action": "input->date-validation#updateEndDateMin"
+                  "data-price-target": "start",
+                  "data-action": "input->date-validation#updateEndDateMin input->price#update"
                 } %>
     <%= f.input :end_date,
                 as: :string,
                 input_html: { 
                   type: "date",
                   min: Date.current.to_s,
-                  "data-date-validation-target": "endDate"
+                  "data-date-validation-target": "endDate",
+                  "data-price-target": "end",
+                  "data-action": "input->price#update"
                 } %>
+    <div class="mt-3 mb-3">
+      <strong>Total price:</strong> $<span data-price-target="total">0.00</span>
+    </div>
     <%= f.submit "Request booking", class: "btn btn-primary" %>
   <% end %>
 </div>
