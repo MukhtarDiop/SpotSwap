@@ -23,7 +23,7 @@
 
       <p><strong>Hosted by:</strong> <%= @spot.user.first_name %> <%= @spot.user.last_name %></p>
       <p><strong>Location:</strong> <%= @spot.address %> (<%= @spot.latitude %>, <%= @spot.longitude %>)</p>
-      <p><strong>Rate:</strong> $<%= @spot.rate %> / day</p>
+      <p><strong>Rate:</strong> <%= number_to_currency @spot.rate %> / day</p>
       <p><strong>Dimensions:</strong> <%= @spot.length %>′ × <%= @spot.width %>′ × <%= @spot.height %>′</p>
 
       <%= link_to "Book Now", new_spot_booking_path(@spot), class: "btn btn-success mt-3 px-4 py-2" %>

@@ -10,7 +10,7 @@
           <div class="featured-spot-desc">Size: <%= spot.length %>m X <%= spot.height %>m X <%= spot.width %>m </div>
            <div class="featured-spot-desc"><%= spot.category %></div>
           <div class="featured-spot-footer">
-            <span class="featured-spot-price">$<%= spot.rate %>/day</span>
+            <span class="price-tag"><%= number_to_currency spot.rate %>/day</span>
              <%= link_to "Book", new_spot_booking_path(spot), class: "btn btn-primary" %>
           </div>
       </div>
