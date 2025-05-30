@@ -1,32 +1,30 @@
-<div class="container mt-5">
-  <div>
-    <div class="col-md-6">
-      <% if @spot.photos.attached? %>
-        <div id="spot-carousel" class="carousel slide mb-4" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <% @spot.photos.each_with_index do |photo, index| %>
-              <div class="carousel-item <%= 'active' if index == 0 %>">
-                <%= cl_image_tag photo.key, height: 400, width: 600, crop: :fill, class: "d-block w-100 rounded" %>
-              </div>
-            <% end %>
-          </div>
-        </div>
+<div class="container" style="max-width: 600px; margin: 0 auto;">
+  <div class="spot-card" style="background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 32px 24px; margin-top: 32px; min-width: 400px; max-width: 700px;">
+    
+    <% if @spot.photos.any? %>
+      <div style="text-align: center;">
+        <% @spot.photos.each do |photo| %>
+          <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid mb-3", style: "border-radius: 12px; object-fit: cover; max-width: 100%;" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <h2 style="font-size: 1.7rem; font-weight: 600; margin-top: 16px;">
+      <%= @spot.description %>
+    </h2>
+
+    <p>Hosted by - <%= @spot.user.first_name %> <%= @spot.user.last_name %></p>
+    <p>Location: <%= @spot.latitude %>, <%= @spot.longitude %></p>
+    <p>Rate: $<%= number_with_precision(@spot.rate, precision: 2) %> per day</p>
+    <p>Dimensions: <%= @spot.length %>' X <%= @spot.width %>' X <%= @spot.height %>'</p>
+
+    <div style="margin-top: 16px;">
+      <% if user_signed_in? && @already_booked %>
+        <span class="text-success" style="font-weight: 500;">Booking requested!</span>
+      <% else %>
+        <%= link_to "Book Now", new_spot_booking_path(@spot), class: "btn btn-primary" %>
       <% end %>
     </div>
-
-    <div class="col-md-6">
-      <h1 class="mb-3"><%= @spot.title %></h1>
-      <p class="text-muted mb-2"><i><%= @spot.category.capitalize %></i></p>
-      <p class="lead"><%= @spot.description %></p>
-
-      <hr>
-
-      <p><strong>Hosted by:</strong> <%= @spot.user.first_name %> <%= @spot.user.last_name %></p>
-      <p><strong>Location:</strong> <%= @spot.address %> (<%= @spot.latitude %>, <%= @spot.longitude %>)</p>
-      <p><strong>Rate:</strong> <%= number_to_currency @spot.rate %> / day</p>
-      <p><strong>Dimensions:</strong> <%= @spot.length %>′ × <%= @spot.width %>′ × <%= @spot.height %>′</p>
-
-      <%= link_to "Book Now", new_spot_booking_path(@spot), class: "btn btn-success mt-3 px-4 py-2" %>
-    </div>
+    
   </div>
 </div>

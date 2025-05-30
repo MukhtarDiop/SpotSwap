@@ -15,4 +15,12 @@ class Spot < ApplicationRecord
   validates :width, numericality: true
   validates :category, presence: true
   validates :category, inclusion: { in: CATEGORIES }
+
+  def city
+    if address.present?
+      Geocoder.search(address).first&.city
+    elsif latitude.present? && longitude.present?
+      Geocoder.search([latitude, longitude]).first&.city
+    end
+  end
 end
