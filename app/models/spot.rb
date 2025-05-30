@@ -9,12 +9,22 @@ class Spot < ApplicationRecord
   validates :description, presence: true, length: { maximum: 120 }
   validates :title, presence: true, length: { maximum: 30 }
   validates :address, presence: true
-  validates :length, presence: true
-  validates :length, numericality: true
-  validates :width, presence: true
-  validates :width, numericality: true
-  validates :category, presence: true
-  validates :category, inclusion: { in: CATEGORIES }
+  validates :length, presence: true, numericality: { 
+    greater_than: 0, message: "cannot be zero or negative"
+  }
+
+  validates :width, presence: true, numericality: { 
+    greater_than: 0, message: "cannot be zero or negative"
+  }
+
+  validates :height, numericality: { 
+    greater_than: 0, message: "cannot be negative"
+  }, allow_nil: true
+  validates :category, presence: true, inclusion: { in: CATEGORIES }
+  validates :rate, presence: true, numericality: { 
+    greater_than: 0, message: "cannot be zero or negative", 
+    less_than_or_equal_to: 30, too_high: "cannot be over $30"
+  }
 
   def city
     if address.present?
