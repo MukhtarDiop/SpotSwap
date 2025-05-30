@@ -1,5 +1,23 @@
 <div class="profile-container">
-  <h1>Your Profile</h1>
+  <div class="profile-header" style="display: flex; align-items: center; gap: 24px; margin-bottom: 32px;">
+    <%= form_with(model: current_user, url: profile_path, method: :patch, local: true, html: {multipart: true, id: 'profile-image-form'}) do |f| %>
+      <label for="user_profile_image" style="cursor: pointer;">
+        <% if current_user.profile_image.attached? %>
+          <%= image_tag current_user.profile_image, class: "profile-avatar", style: "width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 2px solid #eee;" %>
+        <% else %>
+          <div class="profile-avatar" style="width: 96px; height: 96px; border-radius: 50%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #bbb; border: 2px solid #eee;">
+            <i class="fas fa-user"></i>
+          </div>
+        <% end %>
+        <%= f.file_field :profile_image, id: "user_profile_image", style: "display: none;" %>
+      </label>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="font-size: 1.5rem; font-weight: 600;">
+          <%= current_user.first_name %> <%= current_user.last_name %>
+        </div>
+      </div>
+    <% end %>
+  </div>
   <div class="profile-tabs">
     <button class="tab-btn active" data-tab="bookings">My Bookings</button>
     <button class="tab-btn" data-tab="spots">My Spots</button>
@@ -8,11 +26,7 @@
   <div class="tab-content" id="bookings-tab">
     <% if @bookings.any? %>
       <% @bookings.each do |booking| %>
-        <div class="profile-card">
-          <strong>Spot:</strong> <%= booking.spot.description %><br>
-          <strong>Dates:</strong> <%= booking.start_date %> to <%= booking.end_date %><br>
-          <strong>Status:</strong> <%= booking.status&.capitalize || 'Pending' %>
-        </div>
+        <%= render "profiles/booking_card", booking: booking, show_actions: false %>
       <% end %>
     <% else %>
       <p>No bookings yet.</p>
@@ -27,10 +41,11 @@
               <%= render 'spots/form', spot: spot %>
             <% else %>
               <div style="position: absolute; top: 16px; right: 16px;">
-                <%= link_to "Edit", profile_path(edit_spot_id: spot.id), data: { turbo_frame: "spot_#{spot.id}" }, class: "btn btn-warning btn-sm" %>
+                <%= link_to "Edit", profile_path(edit_spot_id: spot.id), data: { turbo_frame: "spot_#{spot.id}" }, class: "btn btn-primary btn-sm" %>
               </div>
-              <strong>Description:</strong> <%= spot.description %><br>
-              <strong>Category:</strong> <%= spot.category %>
+              <strong>Description:</strong> <span style="display:inline-block; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom;"> <%= spot.description %></span><br>
+              <strong>Category:</strong> <%= spot.category %><br>
+              <%= link_to 'View Spot', spot_path(spot), target: '_blank', rel: 'noopener', style: 'font-size: 1rem; text-decoration: underline; color: #007bff; margin-top: 4px; display: inline-block;' %>
             <% end %>
           </div>
         </turbo-frame>
@@ -44,7 +59,7 @@
   <% if @my_spot_bookings && @my_spot_bookings.any? %>
     <% @my_spot_bookings.each do |booking| %>
       <%= turbo_frame_tag dom_id(booking) do %>
-        <%= render "profiles/booking_card", booking: booking %>
+        <%= render "profiles/booking_card", booking: booking, show_actions: true %>
       <% end %>
     <% end %>
   <% else %>
@@ -116,6 +131,13 @@
       document.getElementById('bookings-tab').style.display = 'none';
       document.getElementById('spots-tab').style.display = '';
       document.getElementById('myspotbookings-tab').style.display = 'none';
+    }
+
+    var fileInput = document.getElementById('user_profile_image');
+    if (fileInput) {
+      fileInput.addEventListener('change', function() {
+        document.getElementById('profile-image-form').submit();
+      });
     }
   });
 </script>

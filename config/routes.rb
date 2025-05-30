@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   # Read One Profile
-  get 'profile', to: 'profiles#show'
+  resource :profile, only: [:show, :update]
 
   # See booking status as user
   get 'bookings/:id/status', to: 'bookings#status', as: 'booking_status'

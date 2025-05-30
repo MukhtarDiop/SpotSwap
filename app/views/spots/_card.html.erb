@@ -1,13 +1,17 @@
 <turbo-frame id="spot_<%= spot.id %>">
-  <div class="profile-card" style="position: relative;">
-    <% if params[:edit_spot_id].to_i == spot.id %>
-      <%= render 'spots/form', spot: spot %>
-    <% else %>
-      <div style="position: absolute; top: 16px; right: 16px;">
-        <%= link_to "Edit", profile_path(edit_spot_id: spot.id), data: { turbo_frame: "spot_#{spot.id}" }, class: "btn btn-warning btn-sm" %>
-      </div>
-      <strong>Description:</strong> <%= spot.description %><br>
-      <strong>Category:</strong> <%= spot.category %>
-    <% end %>
-  </div>
+  <%= link_to spot_path(spot), style: 'text-decoration: none; color: inherit; display: block;' do %>
+    <div class="profile-card" style="position: relative;">
+      <% if params[:edit_spot_id].to_i == spot.id %>
+        <%= render 'spots/form', spot: spot %>
+      <% else %>
+        <% if spot.user == current_user %>
+          <div style="position: absolute; top: 16px; right: 16px;">
+            <%= link_to "Edit", profile_path(edit_spot_id: spot.id), data: { turbo_frame: "spot_#{spot.id}" }, class: "btn btn-primary btn-sm" %>
+          </div>
+        <% end %>
+        <strong>Description:</strong> <span style="display:inline-block; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom;"> <%= spot.description %></span><br>
+        <strong>Category:</strong> <%= spot.category %>
+      <% end %>
+    </div>
+  <% end %>
 </turbo-frame>
