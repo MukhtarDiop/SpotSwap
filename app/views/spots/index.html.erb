@@ -1,4 +1,5 @@
-  <h2>Browse through available spots</h2>
+<div class="container" style="max-width: 1200px; margin: 0 auto;">
+  <h2>Browse available spots</h2>
 
   <!-- Le contrôleur est ici sur le parent commun -->
   <div class="row" data-controller="filter">
@@ -31,17 +32,23 @@
       </div>
     <% end %>
 
-    <!-- MAP -->
-    <div style="width: 100%; height: 600px;"
-        data-controller="map"
-        data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-        class="mt-5 my-5">
+    <!-- MAP in card -->
+    <div class="col-12 mb-5">
+      <div class="card spot-card" style="border-radius: 1rem; box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.05); padding: 1.5rem;">
+        <div style="width: 100%; height: 500px; border-radius: 1rem; overflow: hidden;">
+          <div
+            data-controller="map"
+            data-map-markers-value="<%= @markers.to_json %>"
+            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+            style="width: 100%; height: 100%;">
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- DYNAMIC RESULTS -->
-    <div id="results" data-filter-target="results">
-        <%= render partial: "spots_list", locals: { spots: @spots } %>
+    <div id="results" data-filter-target="results" class="col-12">
+      <%= render partial: "spots_list", locals: { spots: @spots } %>
     </div>
   </div>
 
