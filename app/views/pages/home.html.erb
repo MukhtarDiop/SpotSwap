@@ -6,12 +6,17 @@
   <div class="hero-content">
     <h1>Find Storage Space Anywhere</h1>
     <p>Rent unused garages, basements, and storage units from local owners. Safe, affordable, and convenient.</p>
-    <form class="hero-search" action="<%= spots_path %>" method="get">
-      <input type="text" name="location" placeholder="Enter location..." />
-      <input type="date" name="start_date" />
-      <input type="date" name="end_date" />
-      <button type="submit">Search</button>
-    </form>
+    <%= form_with url: spots_path, method: :get, class: "d-flex flex-wrap gap-3 align-items-center", local: true do |f| %>
+      <%= f.select :category, Spot::CATEGORIES, prompt: "Select category", class: "form-select rounded-pill px-3 py-2" %>
+
+      <%= f.text_field :location, placeholder: "Enter location", class: "form-control rounded-pill px-3 py-2" %>
+
+      <%= f.number_field :length,min: 0,placeholder: "Min length (m)", class: "form-control rounded-pill px-3 py-2" %>
+      <%= f.number_field :width, min: 0,placeholder: "Min width (m)", class: "form-control rounded-pill px-3 py-2" %>
+      <%= f.number_field :height,min: 0, placeholder: "Min height (m)", class: "form-control rounded-pill px-3 py-2" %>
+
+      <%= f.submit "Search", class: "btn btn-primary rounded-pill px-4 py-2" %>
+    <% end %>
     <div class="hero-stats">
       <div>
         <span class="stat-value">10,000+</span>

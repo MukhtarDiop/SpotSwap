@@ -1,34 +1,53 @@
-<div class="spots-logo-container">
-  <%# <%= image_tag "https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748375631/ChatGPT_Image_May_27_2025_at_02_53_12_PM_iz8dcr.png", alt: "Logo", class: "spots-logo" %>
-</div>
-<div class="container">
-  <h1>Spots</h1>
-  <div class="row">
-    <% @spots.each do |spot| %>
-      <div class="col-md-4 mb-4">
-        <div class="card spot-card h-100">
-          <div class="card-body">
-            <%= cl_image_tag(spot.photos.first.key, class: "img-fluid rounded-top", crop: :fill) if spot.photos.attached? %>
-            <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block;">
-              <%= link_to spot.title, spot_path(spot) %>
-            </h5>
-            <p class="card-city text-secondary mb-1" style="font-size: 1rem;"><%= spot.city.presence || spot.address %></p>
-            <p class="card-subtitle">
-              <%= spot.category.capitalize %>
-            </p>
-            <p class="card-text"><%= truncate(spot.description, length: 100) %></p>
-          </div>
-          <div class="card-footer d-flex justify-content-between align-items-center">
-            <span class="price-tag">$<%= spot.rate %>/day</span>
-            <%= link_to "Book", new_spot_booking_path(spot), class: "btn btn-primary btn-sm" %>
-          </div>
-        </div>
+  <h2>Browse through available spots</h2>
+
+  <!-- Le contrôleur est ici sur le parent commun -->
+  <div class="row" data-controller="filter">
+    <%= form_with url: spots_path, method: :get,
+      html: {
+        class: "row gx-2 align-items-end mb-4",
+        data: {
+          filter_target: "form",
+          action: "change->filter#search"
+        }
+      } do %>
+      <div class="col-md-2">
+        <%= select_tag :category, options_for_select(['storage', 'parking', 'garage'], params[:category]), include_blank: "All", class: "form-select" %>
+      </div>
+
+      <div class="col-md-3">
+        <%= text_field_tag :location, params[:location], placeholder: "Enter location...", class: "form-control" %>
+      </div>
+
+      <div class="col-md-2">
+        <%= number_field_tag :length, params[:length],min: 0, placeholder: "Min length (m)", class: "form-control rounded-pill px-3 py-2" %>
+      </div>
+
+      <div class="col-md-2">
+        <%= number_field_tag :width, params[:width],min: 0, placeholder: "Min width (m)", class: "form-control rounded-pill px-3 py-2" %>
+      </div>
+
+      <div class="col-md-2">
+        <%= number_field_tag :height, params[:height],min: 0, placeholder: "Min height (m)", class: "form-control rounded-pill px-3 py-2" %>
       </div>
     <% end %>
+
+    <!-- MAP -->
+    <div style="width: 100%; height: 600px;"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+        class="mt-5 my-5">
+    </div>
+
+    <!-- DYNAMIC RESULTS -->
+    <div id="results" data-filter-target="results">
+        <%= render partial: "spots_list", locals: { spots: @spots } %>
+    </div>
   </div>
-  <div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
+
+  <% if @spots.empty? %>
+    <div class="alert alert-warning text-center w-100">
+      No spots match your search criteria.
+    </div>
+  <% end %>
 </div>
