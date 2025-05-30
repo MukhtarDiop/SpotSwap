@@ -1,36 +1,43 @@
 <div class="container" style="max-width: 1200px; margin: 0 auto;">
-  <h2>Browse available spots</h2>
+  <div class="row justify-content-center text-center mb-4">
+    <div class="col-md-8">
+      <h2>Browse available spots</h2>
+    </div>
+  </div>
 
   <!-- Le contrôleur est ici sur le parent commun -->
-  <div class="row" data-controller="filter">
-    <%= form_with url: spots_path, method: :get,
-      html: {
-        class: "row gx-2 align-items-end mb-4",
-        data: {
-          filter_target: "form",
-          action: "change->filter#search"
-        }
-      } do %>
-      <div class="col-md-2">
-        <%= select_tag :category, options_for_select(['storage', 'parking', 'garage'], params[:category]), include_blank: "All", class: "form-select" %>
-      </div>
+    <div class="row justify-content-center mb-4" data-controller="filter">
+      <div class="col-md-10">
+        <%= form_with url: spots_path, method: :get,
+          html: {
+            class: "row gx-2 align-items-end",
+            data: {
+              filter_target: "form",
+              action: "change->filter#search"
+            }
+          } do %>
+          <div class="col-md-2">
+            <%= select_tag :category, options_for_select(['storage', 'parking', 'garage'], params[:category]), include_blank: "All", class: "form-select" %>
+          </div>
 
-      <div class="col-md-3">
-        <%= text_field_tag :location, params[:location], placeholder: "Enter location...", class: "form-control" %>
-      </div>
+          <div class="col-md-3">
+            <%= text_field_tag :location, params[:location], placeholder: "Enter location...", class: "form-control" %>
+          </div>
 
-      <div class="col-md-2">
-        <%= number_field_tag :length, params[:length],min: 0, placeholder: "Min length (m)", class: "form-control rounded-pill px-3 py-2" %>
-      </div>
+          <div class="col-md-2">
+            <%= number_field_tag :length, params[:length], min: 0, placeholder: "Length (m)", class: "form-control px-3 py-2" %>
+          </div>
 
-      <div class="col-md-2">
-        <%= number_field_tag :width, params[:width],min: 0, placeholder: "Min width (m)", class: "form-control rounded-pill px-3 py-2" %>
-      </div>
+          <div class="col-md-2">
+            <%= number_field_tag :width, params[:width], min: 0, placeholder: "Width (m)", class: "form-control px-3 py-2" %>
+          </div>
 
-      <div class="col-md-2">
-        <%= number_field_tag :height, params[:height],min: 0, placeholder: "Min height (m)", class: "form-control rounded-pill px-3 py-2" %>
+          <div class="col-md-2">
+            <%= number_field_tag :height, params[:height], min: 0, placeholder: "Height (m)", class: "form-control px-3 py-2" %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
 
     <!-- MAP in card -->
     <div class="col-12 mb-5">
