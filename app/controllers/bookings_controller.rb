@@ -42,7 +42,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.status = "pending"
     if @booking.save
-    redirect_to spot_path(@spot), notice: "Booking requested!"
+    redirect_to spot_path(@spot)
     else
       render :new
     end
