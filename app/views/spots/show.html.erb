@@ -1,16 +1,32 @@
-<div class="container">
-    <h1>Spots </h1>
-    <div class="mt-4">
-        <% @spot.photos.each do |photo| %>
-            <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid mb-3" %>
-        <% end %>
-        <h2><%= @spot.title%></h2>
-        <h3><%= @spot.description%></h3>
-        <p>hosted by - <%= @spot.user.first_name%> <%= @spot.user.last_name%></p>
-        <p>Location: <%= @spot.latitude%> <%= @spot.longitude%></p>
-        <p>Rate: <%= @spot.rate%> per day</p>
-        <p>Dimensions: <%= @spot.length%>' X <%= @spot.width%>' X <%= @spot.height%>'  </p>
-        <%= link_to "Book Now", new_spot_booking_path(@spot), class: "btn btn-primary" %>
+<div class="container mt-5">
+  <div>
+    <div class="col-md-6">
+      <% if @spot.photos.attached? %>
+        <div id="spot-carousel" class="carousel slide mb-4" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <% @spot.photos.each_with_index do |photo, index| %>
+              <div class="carousel-item <%= 'active' if index == 0 %>">
+                <%= cl_image_tag photo.key, height: 400, width: 600, crop: :fill, class: "d-block w-100 rounded" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
 
+    <div class="col-md-6">
+      <h1 class="mb-3"><%= @spot.title %></h1>
+      <p class="text-muted mb-2"><i><%= @spot.category.capitalize %></i></p>
+      <p class="lead"><%= @spot.description %></p>
+
+      <hr>
+
+      <p><strong>Hosted by:</strong> <%= @spot.user.first_name %> <%= @spot.user.last_name %></p>
+      <p><strong>Location:</strong> <%= @spot.address %> (<%= @spot.latitude %>, <%= @spot.longitude %>)</p>
+      <p><strong>Rate:</strong> $<%= @spot.rate %> / day</p>
+      <p><strong>Dimensions:</strong> <%= @spot.length %>′ × <%= @spot.width %>′ × <%= @spot.height %>′</p>
+
+      <%= link_to "Book Now", new_spot_booking_path(@spot), class: "btn btn-success mt-3 px-4 py-2" %>
+    </div>
+  </div>
 </div>
