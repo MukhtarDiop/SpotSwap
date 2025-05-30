@@ -12,30 +12,30 @@
 
           <!-- Category (Full Width) -->
           <div class="mb-3">
-            <%= f.select :category, Spot::CATEGORIES, prompt: "Select category", class: "form-select rounded-pill px-3 py-2 w-100" %>
+            <%= f.select :category, Spot::CATEGORIES, prompt: "Select category", class: "form-select px-3 py-2 w-100" %>
           </div>
 
           <!-- Location (Full Width) -->
           <div class="mb-3">
-            <%= f.text_field :location, placeholder: "Enter location", class: "form-control rounded-pill px-3 py-2 w-100" %>
+            <%= f.text_field :location, placeholder: "Enter location", class: "form-control px-3 py-2 w-100" %>
           </div>
 
           <!-- Dimensions (Length, Width, Height) -->
           <div class="row g-2 mb-3">
             <div class="col">
-              <%= f.number_field :length, min: 0, placeholder: "Min length (m)", class: "form-control rounded-pill px-3 py-2" %>
+              <%= f.number_field :width, min: 0, placeholder: "Width (m)", class: "form-control px-3 py-2" %>
             </div>
             <div class="col">
-              <%= f.number_field :width, min: 0, placeholder: "Min width (m)", class: "form-control rounded-pill px-3 py-2" %>
+              <%= f.number_field :length, min: 0, placeholder: "Length (m)", class: "form-control px-3 py-2" %>
             </div>
             <div class="col">
-              <%= f.number_field :height, min: 0, placeholder: "Min height (m)", class: "form-control rounded-pill px-3 py-2" %>
+              <%= f.number_field :height, min: 0, placeholder: "Height (m)", class: "form-control px-3 py-2" %>
             </div>
           </div>
 
           <!-- Submit Button -->
           <div class="text-center">
-            <%= f.submit "Search", class: "btn btn-primary rounded-pill px-4 py-2" %>
+            <%= f.submit "Search", class: "btn btn-primary px-4 py-2" %>
           </div>
 
         <% end %>
