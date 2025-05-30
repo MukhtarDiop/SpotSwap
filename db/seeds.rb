@@ -10,7 +10,7 @@ naika   = User.create!(email: "naika@example.com", password: "password", first_n
 mukhtar = User.create!(email: "mukhtar@example.com", password: "password", first_name: "Mukhtar", last_name: "N")
 mateo   = User.create!(email: "mateo@example.com", password: "password", first_name: "Mateo", last_name: "M")
 safwan  = User.create!(email: "safwan@example.com", password: "password", first_name: "Safwan", last_name: "A")
-davy    = User.create!(email: "davy@example.com", password: "password", first_name: "Devy", last_name: "D")
+davy    = User.create!(email: "davy@example.com", password: "password", first_name: "Davy", last_name: "D")
 
 puts "Creating additional test users... 🙋🏼"
 user1 = User.create!(email: "lena@example.com", password: "password", first_name: "Lena", last_name: "T")
@@ -22,7 +22,7 @@ puts "Creating spots for Naika... 👩🏾‍💻"
 spot1 = Spot.create!(
   title: "Downtown Garage Spot",
   description: "Indoor garage in the city center. Safe, secure, and easily accessible.",
-  category: "garage",
+  category: "parking",
   rate: 18.0,
   length: 4.5,
   width: 2.5,
@@ -30,8 +30,8 @@ spot1 = Spot.create!(
   address: "100 Montgomery St, San Francisco, CA 94104",
   user: naika
 )
-# file = URI.open("https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/v1234567890/downtown_garage.jpg")
-# spot1.photos.attach(io: file, filename: "downtown_garage.jpg", content_type: "image/jpg")
+file = URI.open("https://images.unsplash.com/photo-1699877905495-6989b30175ad?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot1.photos.attach(io: file, filename: "downtown_garage.jpg", content_type: "image/jpg")
 
 spot2 = Spot.create!(
   title: "Basement Storage Room",
@@ -44,8 +44,8 @@ spot2 = Spot.create!(
   address: "823 Divisadero St, San Francisco, CA 94117",
   user: naika
 )
-# file = URI.open("https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/v1234567890/storage_room.jpg")
-# spot2.photos.attach(io: file, filename: "storage_room.jpg", content_type: "image/jpg")
+file = URI.open("https://images.unsplash.com/photo-1635108198322-18c814f9b70f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot2.photos.attach(io: file, filename: "storage_room.jpg", content_type: "image/jpg")
 
 spot3 = Spot.create!(
    title: "Civic Center Parking Spot",
@@ -58,8 +58,8 @@ spot3 = Spot.create!(
   address: "355 McAllister St, San Francisco, CA 94102",
   user: naika
 )
-# file = URI.open("https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/v1234567890/parking_spot.jpg")
-# spot3.photos.attach(io: file, filename: "parking_spot.jpg", content_type: "image/jpg")
+file = URI.open("https://images.unsplash.com/photo-1623683786184-e526cc99c060?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot3.photos.attach(io: file, filename: "parking_spot.jpg", content_type: "image/jpg")
 
 puts "Creating spots for Mateo... 👨🏻‍💻"
 spot4 = Spot.create!(
@@ -73,8 +73,8 @@ spot4 = Spot.create!(
   address: "2600 Harrison St, San Francisco, CA 94110",
   user: mateo
 )
-# file = URI.open("https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/v1234567890/mission_garage.jpg")
-# spot4.photos.attach(io: file, filename: "mission_garage.jpg", content_type: "image/jpg")
+file = URI.open("https://plus.unsplash.com/premium_photo-1730910017155-f7c186a5f690?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot4.photos.attach(io: file, filename: "mission_garage.jpg", content_type: "image/jpg")
 
 spot5 = Spot.create!(
   title: "Spare Closet Storage",
@@ -87,8 +87,8 @@ spot5 = Spot.create!(
   address: "948 Valencia St, San Francisco, CA 94110",
   user: mateo
 )
-# file = URI.open("https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/v1234567890/spare_closet.jpg")
-# spot5.photos.attach(io: file, filename: "spare_closet.jpg", content_type: "image/jpg")
+file = URI.open("https://images.unsplash.com/photo-1721522010396-2710418c17de?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGVtcHR5JTIwc3RvcmFnZSUyMGNsb3NldHxlbnwwfHwwfHx8MA%3D%3D")
+spot5.photos.attach(io: file, filename: "spare_closet.jpg", content_type: "image/jpg")
 
 puts "Creating spots for Lena...🙋🏼‍♀️"
 spot6 = Spot.create!(
@@ -102,8 +102,8 @@ spot6 = Spot.create!(
   address: "123 Market St, San Francisco, CA 94103",
   user: user1
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Parking+Spot")
-# spot6.photos.attach(io: file, filename: "parking_spot2.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1523362612182-052e9ff2c8da?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot6.photos.attach(io: file, filename: "parking_spot2.png", content_type: "image/png")
 
 spot7 = Spot.create!(
   title: "Garage Spot with EV Charger",
@@ -116,8 +116,8 @@ spot7 = Spot.create!(
   address: "456 Mission St, San Francisco, CA 94105",
   user: user1
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Garage+Spot+EV")
-# spot7.photos.attach(io: file, filename: "garage_ev.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1572094943263-a746cbf1d05f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot7.photos.attach(io: file, filename: "garage_ev.png", content_type: "image/png")
 
 spot8 = Spot.create!(
   title: "Storage Near BART Station",
@@ -130,8 +130,8 @@ spot8 = Spot.create!(
   address: "789 Howard St, San Francisco, CA 94103",
   user: user1
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Storage+Locker")
-# spot8.photos.attach(io: file, filename: "storage_locker.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1683984210404-d9fd70a40d02?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot8.photos.attach(io: file, filename: "storage_locker.png", content_type: "image/png")
 
 spot9 = Spot.create!(
   title: "Compact Car Parking Spot",
@@ -144,8 +144,8 @@ spot9 = Spot.create!(
   address: "1010 Folsom St, San Francisco, CA 94103",
   user: user1
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Compact+Parking")
-# spot9.photos.attach(io: file, filename: "compact_parking.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1529089059310-92aa39a13908?q=80&w=2591&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot9.photos.attach(io: file, filename: "compact_parking.png", content_type: "image/png")
 
 puts "Creating spots for Omar...🤷🏽‍♂️"
 spot10 = Spot.create!(
@@ -159,8 +159,8 @@ spot10 = Spot.create!(
   address: "2500 Van Ness Ave, San Francisco, CA 94109",
   user: user2
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Garage+Workshop")
-# spot10.photos.attach(io: file, filename: "garage_workshop.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1635108198395-82a67cd5eaec?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot10.photos.attach(io: file, filename: "garage_workshop.png", content_type: "image/png")
 
 spot11 = Spot.create!(
   title: "Gated Storage Unit",
@@ -173,8 +173,8 @@ spot11 = Spot.create!(
   address: "1111 Pine St, San Francisco, CA 94108",
   user: user2
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Storage+Unit")
-# spot11.photos.attach(io: file, filename: "storage_unit.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1694601618351-dbbbb2b8934f?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot11.photos.attach(io: file, filename: "storage_unit.png", content_type: "image/png")
 
 spot12 = Spot.create!(
   title: "Outdoor Covered Parking",
@@ -187,8 +187,8 @@ spot12 = Spot.create!(
   address: "500 Howard St, San Francisco, CA 94105",
   user: user2
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Outdoor+Parking")
-# spot12.photos.attach(io: file, filename: "outdoor_parking.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1693054367370-41ccf4dc8674?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot12.photos.attach(io: file, filename: "outdoor_parking.png", content_type: "image/png")
 
 spot13 = Spot.create!(
   title: "Bay Area Garage Spot",
@@ -201,15 +201,15 @@ spot13 = Spot.create!(
   address: "1500 Terry A Francois Blvd, San Francisco, CA 94158",
   user: user2
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Bay+Garage")
-# spot13.photos.attach(io: file, filename: "bay_garage.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1635108198165-1773945e506e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot13.photos.attach(io: file, filename: "bay_garage.png", content_type: "image/png")
 
 puts "Creating spots for Claire...🧘🏾‍♀️"
 
 spot14 = Spot.create!(
   title: "Garage Space in Seattle",
   description: "Secure garage spot near downtown Seattle. Close to I-5 and central spots.",
-  category: "garage",
+  category: "parking",
   rate: 22.0,
   length: 5.0,
   width: 2.7,
@@ -217,8 +217,8 @@ spot14 = Spot.create!(
   address: "200 1st Ave N, Seattle, WA 98109, USA",
   user: user3
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Seattle+Garage")
-# spot14.photos.attach(io: file, filename: "seattle_garage.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1614972625561-bc56585aba6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot14.photos.attach(io: file, filename: "seattle_garage.png", content_type: "image/png")
 
 spot15 = Spot.create!(
   title: "Toronto Parking Spot",
@@ -231,8 +231,8 @@ spot15 = Spot.create!(
   address: "123 Queen St W, Toronto, ON M5H 2M9, Canada",
   user: user3
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Toronto+Parking")
-# spot15.photos.attach(io: file, filename: "toronto_parking.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1662021163989-f0d185a5442d?q=80&w=2954&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot15.photos.attach(io: file, filename: "toronto_parking.png", content_type: "image/png")
 
 puts "Creating spots for Diego...🧔🏼‍♂️"
 
@@ -247,13 +247,13 @@ spot16 = Spot.create!(
   address: "Av. Insurgentes Sur 1234, Del Valle, 03100 Ciudad de México, CDMX, Mexico",
   user: user4
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Mexico+Storage")
-# spot16.photos.attach(io: file, filename: "mexico_storage.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1551313158-73d016a829ae?q=80&w=2937&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot16.photos.attach(io: file, filename: "mexico_storage.png", content_type: "image/png")
 
 spot17 = Spot.create!(
   title: "Garage in Vancouver",
   description: "Secure garage in central Vancouver with 24/7 entry and surveillance.",
-  category: "garage",
+  category: "parking",
   rate: 24.0,
   length: 5.5,
   width: 2.6,
@@ -261,13 +261,13 @@ spot17 = Spot.create!(
   address: "555 Burrard St, Vancouver, BC V7X 1M3, Canada",
   user: user4
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Vancouver+Garage")
-# spot17.photos.attach(io: file, filename: "vancouver_garage.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1588482683425-6b5858b06896?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot17.photos.attach(io: file, filename: "vancouver_garage.png", content_type: "image/png")
 
 spot18 = Spot.create!(
   title: "Underground Garage Space",
   description: "Underground garage with gated entry. Central location, well-lit and secure.",
-  category: "garage",
+  category: "parking",
   rate: 24.0,
   length: 5.5,
   width: 2.6,
@@ -275,8 +275,8 @@ spot18 = Spot.create!(
   address: "555 Burrard St, Vancouver, BC V7X 1M3, Canada",
   user: user4
 )
-# file = URI.open("https://via.placeholder.com/600x400.png?text=Vancouver+Garage")
-# spot17.photos.attach(io: file, filename: "vancouver_garage.png", content_type: "image/png")
+file = URI.open("https://images.unsplash.com/photo-1608626057093-91eb066ae1a3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+spot17.photos.attach(io: file, filename: "vancouver_garage.png", content_type: "image/png")
 
 puts "Creating bookings... 🧟"
 

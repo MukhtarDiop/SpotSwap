@@ -4,24 +4,34 @@ class SpotsController < ApplicationController
   before_action :authorize_spot_owner, only: [:update, :destroy]
 
   def index
-    @spots = Spot.all
-    # This part related to the map to pass more info about the spots to the view
+    if current_user
+      @spots = Spot.where.not(user_id: current_user.id).order(created_at: :desc)
+    else
+      @spots = Spot.order(created_at: :desc)
+    end
+    @spots = @spots.where(category: params[:category]) if params[:category].present?
+    @spots = @spots.where("address ILIKE ?", "%#{params[:location]}%") if params[:location].present?
+    @spots = @spots.where("length >= ?", params[:length]) if params[:length].present?
+    @spots = @spots.where("width >= ?", params[:width]) if params[:width].present?
+    @spots = @spots.where("height >= ?", params[:height]) if params[:height].present?
+
+    @spots = @spots.order(created_at: :desc)
+    respond_to do |format|
+        format.turbo_stream do
+          render partial: "spots/spots_list", formats: [:html], locals: { spots: @spots }
+        end
+      format.html # fallback pour accès classique (navigateur)
+    end
     @markers = @spots.geocoded.map do |spot|
       {
-    lat: spot.latitude,
-    lng: spot.longitude,
-    info_window_html: render_to_string(partial: "info_window", locals: { spot: spot }),
-    image_url: helpers.asset_url("https://res.cloudinary.com/dg5qvbxjp/image/upload/v1748375631/ChatGPT_Image_May_27_2025_at_02_53_12_PM_iz8dcr.png")
-  }
-    end
-    if params[:location].present?
-      @spots = @spots.where("description ILIKE ? OR category ILIKE ?", "%#{params[:location]}%", "%#{params[:location]}%")
-      # If you have an address or city field, use that instead!
-    end
-
-    if params[:start_date].present? && params[:end_date].present?
-      # Add your date filtering logic here, e.g., exclude spots that are booked in this range
-      # This is a placeholder; actual logic depends on your booking model
+        lat: spot.latitude,
+        lng: spot.longitude,
+        info_window_html: render_to_string(
+          partial: "spots/info_window",
+          formats: [:html],
+          locals: { spot: spot }
+        )
+      }
     end
   end
 

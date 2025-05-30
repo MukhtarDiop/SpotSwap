@@ -3,43 +3,43 @@
     border-radius: 1rem;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
-  
+
     &:hover {
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
       transform: translateY(-2px);
     }
-  
+
     .card-body {
       padding: 1.5rem;
     }
-  
+
     .card-title {
       font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
-  
+
     .card-subtitle {
       font-size: 0.875rem;
       color: #6c757d;
       margin-bottom: 0.75rem;
     }
-  
+
     .card-text {
       font-size: 0.875rem;
       color: #495057;
       margin-bottom: 1rem;
     }
-  
+
     .card-footer {
       background: none;
       border-top: none;
       padding: 1rem 1.5rem;
     }
-  
+
     .price-tag {
       font-weight: bold;
-      color: #198754; // Bootstrap success green
+      color: #198754;
     }
+
   }
-  
