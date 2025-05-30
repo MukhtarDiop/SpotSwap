@@ -19,7 +19,9 @@
     <p>Dimensions: <%= @spot.length %>' X <%= @spot.width %>' X <%= @spot.height %>'</p>
 
     <div style="margin-top: 16px;">
-      <% if user_signed_in? && @already_booked %>
+      <% if user_signed_in? && current_user == @spot.user %>
+        <!-- No booking button for your own spot -->
+      <% elsif user_signed_in? && @already_booked %>
         <span class="text-success" style="font-weight: 500;">Booking requested!</span>
       <% else %>
         <%= link_to "Book Now", new_spot_booking_path(@spot), class: "btn btn-primary" %>
