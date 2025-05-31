@@ -37,6 +37,11 @@
           </div>
         <% end %>
       </div>
+
+      <!-- DYNAMIC RESULTS -->
+      <div id="results" data-filter-target="results" class="col-12 mt-4">
+        <%= render partial: "spots_list", locals: { spots: @spots } %>
+      </div>
     </div>
 
     <!-- MAP in card -->
@@ -52,12 +57,6 @@
         </div>
       </div>
     </div>
-
-    <!-- DYNAMIC RESULTS -->
-    <div id="results" data-filter-target="results" class="col-12">
-      <%= render partial: "spots_list", locals: { spots: @spots } %>
-    </div>
-  </div>
 
   <% if @spots.empty? %>
     <div class="alert alert-warning text-center w-100">
